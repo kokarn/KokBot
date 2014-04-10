@@ -11,7 +11,8 @@ var config = {
 	irc = require( "irc" ),
 	bot = new irc.Client(config.server, config.botName, {
 		channels: config.channels
-	});
+	}),
+	mix = "Kokarn: Lägg in dagens mix!";
 
 /*
 // Listen for joins
@@ -38,3 +39,18 @@ bot.addListener( "message", function( from, to, text, message ) {
 		}
 	}
 });
+
+// say todays mix
+bot.addListener("message", function(from, to, text, message) {
+	if (text === "!mix") {
+		bot.say(config.channels[0], mix);
+	}
+});
+
+// save todays mix
+bot.addListener("message", function(from, to, text, message) {
+	if (text.substring(0, 7) === "!addmix") {
+                mix = text.substring(8);
+	}
+});
+
