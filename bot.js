@@ -51,6 +51,7 @@ bot.addListener("message", function(from, to, text, message) {
 bot.addListener("message", function(from, to, text, message) {
 	if (text.substring(0, 7) === "!addmix") {
                 mix = text.substring(8);
+                bot.say(config.channels[0], "Tack " + from + " nu blir det dunkadunka!");
 	}
 });
 
