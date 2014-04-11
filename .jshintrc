@@ -15,5 +15,11 @@
     "undef": true,
     "strict": true,
     "trailing": true,
-    "node": true
+    "latedef": true,
+    "unused": "vars",
+    "indent": 4,
+    "quotmark": "single",
+    "node": true,
+    "onevar": true,
+    "passfail": true
 }
