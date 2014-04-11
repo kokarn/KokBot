@@ -55,3 +55,8 @@ bot.addListener( "message#kokarn", function( from, to, text, message ) {
         bot.say( config.channels[ 0 ], "Tack " + from + " nu blir det dunkadunka!" );
     }
 });
+
+bot.addListener( 'error', function( message ) {
+    "use strict";
+    console.log( 'error: ', message );
+});
