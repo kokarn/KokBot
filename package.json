@@ -1,0 +1,30 @@
+{
+    "name": "KokBot",
+    "description": "A simple node bot",
+    "version": "0.0.1",
+    "keywords": [
+        "node",
+        "kokbot"
+    ],
+    "homepage": "http://github.com/kokarn/kokbot",
+    "author": {
+        "name": "Oskar Risberg",
+        "email": "kokarn@gmail.com",
+        "url": "kokarn.com"
+    },
+    "scripts": {
+        "test": "grunt test"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/kokarn/kokbot.git"
+    },
+    "bugs": {
+        "url": "http://github.com/kokarn/kokbot/issues"
+    },
+    "license": "MIT",
+    "devDependencies": {
+        "grunt": "~0.4.1",
+        "grunt-contrib-jshint": "~0.6.0"
+    }
+}
