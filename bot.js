@@ -5,12 +5,12 @@ var config = {
         server: "irc.freenode.net",
         botName: "KokBot"
     },
-    /*
-    names = [
-        'kokarn',
-        'gyran'
-    ],
-    */
+/*
+ names = [
+ 'kokarn',
+ 'gyran'
+ ],
+ */
     irc = require( "irc" ),
     bot = new irc.Client(config.server, config.botName, {
         channels: config.channels
@@ -32,18 +32,18 @@ var config = {
  });
  */
 /*
-bot.addListener( "message", function( from, to, text, message ) {
-    "use strict";
-    var i;
-    for( i = 0; i < names.length; i = i + 1 ){
-        if( text.toLowerCase().indexOf( names[ i ] ) !== -1 ){
-            //bot.say( config.channels[0], 'Detected highlight "' + names[ i ] + '"' );
-        } else {
-            //console.log( names[ i ] + " in " + text.toLowerCase() + " " + text.toLowerCase().indexOf( names[ i ] ) );
-        }
-    }
-});
-*/
+ bot.addListener( "message", function( from, to, text, message ) {
+ "use strict";
+ var i;
+ for( i = 0; i < names.length; i = i + 1 ){
+ if( text.toLowerCase().indexOf( names[ i ] ) !== -1 ){
+ //bot.say( config.channels[0], 'Detected highlight "' + names[ i ] + '"' );
+ } else {
+ //console.log( names[ i ] + " in " + text.toLowerCase() + " " + text.toLowerCase().indexOf( names[ i ] ) );
+ }
+ }
+ });
+ */
 
 // say todays mix
 bot.addListener( "message", function( from, to, text, message ) {
@@ -61,4 +61,3 @@ bot.addListener( "message", function( from, to, text, message ) {
         bot.say(config.channels[0], "Tack " + from + " nu blir det dunkadunka!");
     }
 });
-
