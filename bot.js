@@ -1,13 +1,13 @@
 var config = {
-        channels: [ "#kokarn" ],
-        server: "irc.freenode.net",
-        botName: "KokBot"
+        channels: [ '#kokarn' ],
+        server: 'irc.freenode.net',
+        botName: 'KokBot'
     },
-    irc = require( "irc" ),
+    irc = require( 'irc' ),
     bot = new irc.Client(config.server, config.botName, {
         channels: config.channels
     }),
-    mix = "Kokarn: Lägg in dagens mix!";
+    mix = 'Kokarn: Lägg in dagens mix!';
 
 /*
  // Listen for joins
@@ -38,23 +38,23 @@ var config = {
  */
 
 // say todays mix
-bot.addListener( "message", function( from, to, text, message ) {
-    "use strict";
-    if ( text === "!mix" ) {
+bot.addListener( 'message', function( from, to, text, message ) {
+    'use strict';
+    if ( text === '!mix' ) {
         bot.say( config.channels[ 0 ], mix );
     }
 });
 
 // save todays mix
-bot.addListener( "message#kokarn", function( from, text, message ) {
-    "use strict";
-    if ( text.substring( 0, 7 ) === "!addmix" ) {
+bot.addListener( 'message#kokarn', function( from, text, message ) {
+    'use strict';
+    if ( text.substring( 0, 7 ) === '!addmix' ) {
         mix = text.substring( 8 );
-        bot.say( config.channels[ 0 ], "Tack " + from + " nu blir det dunkadunka!" );
+        bot.say( config.channels[ 0 ], 'Tack ' + from + ' nu blir det dunkadunka!' );
     }
 });
 
 bot.addListener( 'error', function( message ) {
-    "use strict";
+    'use strict';
     console.log( 'error: ', message );
 });
