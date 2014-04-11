@@ -48,7 +48,7 @@ bot.addListener( "message", function( from, to, text, message ) {
 });
 
 // save todays mix
-bot.addListener( "message", function( from, to, text, message ) {
+bot.addListener( "message#kokarn", function( from, to, text, message ) {
     "use strict";
     if ( text.substring( 0, 7 ) === "!addmix" ) {
         mix = text.substring( 8 );
