@@ -1,4 +1,5 @@
-/*jslint node: true, white: true */
+/*jshint bitwise:true, camelcase:true, curly:true, eqeqeq:true, es3:true, forin:true, freeze:true, immed:true, newcap:true, noarg:true, noempty:true, nonew:true, plusplus:true, undef:true, strict:true, trailing:true, node:true */
+
 
 var config = {
         channels: [ "#kokarn" ],
