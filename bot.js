@@ -43,15 +43,15 @@ var config = {
 bot.addListener( "message", function( from, to, text, message ) {
     "use strict";
     if ( text === "!mix" ) {
-        bot.say( config.channels[0], mix );
+        bot.say( config.channels[ 0 ], mix );
     }
 });
 
 // save todays mix
 bot.addListener( "message", function( from, to, text, message ) {
     "use strict";
-    if (text.substring(0, 7) === "!addmix") {
-        mix = text.substring(8);
-        bot.say(config.channels[0], "Tack " + from + " nu blir det dunkadunka!");
+    if ( text.substring( 0, 7 ) === "!addmix" ) {
+        mix = text.substring( 8 );
+        bot.say( config.channels[ 0 ], "Tack " + from + " nu blir det dunkadunka!" );
     }
 });
