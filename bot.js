@@ -16,14 +16,15 @@ var config = {
     PushBullet = require( 'pushbullet' ),
     pusher = new PushBullet( 'v19INs18gL8IWynPqNbmWXns9TErz4k1aBujz7gGxaa4a' );
 
-    PushBullet.prototype.friendNode = function friendNote( email, title, body, callback ) {
-        this.push({
-            email: email,
-            type: 'note',
-            title: title,
-            body: body
-        }, callback);
-    };
+PushBullet.prototype.friendNode = function friendNote( email, title, body, callback ) {
+    'use strict';
+    this.push({
+        email: email,
+        type: 'note',
+        title: title,
+        body: body
+    }, callback);
+};
 
 /*
  // Listen for joins
