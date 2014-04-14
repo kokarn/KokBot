@@ -46,22 +46,21 @@ bot.addListener( 'message#kokarn', function( from, text, message ) {
     for( name in names ){
         if( names.hasOwnProperty( name ) ){
             if( text.toLowerCase().indexOf( name ) !== -1 ){
-                bot.say( config.channels[0], 'Detected highlight "' + name + '"' );
                 console.log( 'Trying to push to ' + names[ name ] );
                 if( names[ name ].indexOf( '@' ) !== -1 ){
                     console.log( 'Notification type: Email' );
                     pusher.friendNode( names[ name ], 'Message from #kokarn', text, function( error, response ) {
                         //console.log( 'Error: %j', error );
                         //console.log( response );
-                        console.log( 'Message sent to ' + names[ name ] );
                     });
+                    console.log( 'Message sent to ' + names[ name ] );
                 } else {
                     console.log( 'Notification type: Default' );
                     pusher.note( names[ name ], 'Message from #kokarn', text, function( error, response ){
                         //console.log( error );
                         //console.log( response );
-                        console.log( 'Message sent to ' + names[ name ] );
-                   });
+                    });
+                    console.log( 'Message sent to ' + names[ name ] );
                 }
             }
         }
