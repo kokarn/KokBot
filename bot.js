@@ -14,7 +14,10 @@ var config = {
         'theseal' : 'carlquist@gmail.com'
     },
     PushBullet = require( 'pushbullet' ),
-    pusher = new PushBullet( 'v19INs18gL8IWynPqNbmWXns9TErz4k1aBujz7gGxaa4a' );
+    pusher = new PushBullet( 'v19INs18gL8IWynPqNbmWXns9TErz4k1aBujz7gGxaa4a' ),
+    handlePushbulletRespone = function( error, response ){
+
+    };
 
 PushBullet.prototype.friendNode = function friendNote( email, title, body, callback ) {
     'use strict';
@@ -50,17 +53,11 @@ bot.addListener( 'message#kokarn', function( from, text, message ) {
                 console.log( 'Trying to push to ' + names[ name ] );
                 if( names[ name ].indexOf( '@' ) !== -1 ){
                     console.log( 'Notification type: Email' );
-                    pusher.friendNode( names[ name ], from + ' highlighted you in #kokarn', text, function( error, response ) {
-                        //console.log( 'Error: %j', error );
-                        //console.log( response );
-                    });
+                    pusher.friendNode( names[ name ], from + ' highlighted you in #kokarn', text, handlePushbulletRespone );
                     console.log( 'Message sent to ' + names[ name ] );
                 } else {
                     console.log( 'Notification type: Default' );
-                    pusher.note( names[ name ], from + ' highlighted you in #kokarn', text, function( error, response ){
-                        //console.log( error );
-                        //console.log( response );
-                    });
+                    pusher.note( names[ name ], from + ' highlighted you in #kokarn', text, handlePushbulletRespone );
                     console.log( 'Message sent to ' + names[ name ] );
                 }
             }
