@@ -49,14 +49,14 @@ bot.addListener( 'message#kokarn', function( from, text, message ) {
                 console.log( 'Trying to push to ' + names[ name ] );
                 if( names[ name ].indexOf( '@' ) !== -1 ){
                     console.log( 'Notification type: Email' );
-                    pusher.friendNode( names[ name ], 'Message from #kokarn', text, function( error, response ) {
+                    pusher.friendNode( names[ name ], from + ' highlighted you in #kokarn', text, function( error, response ) {
                         //console.log( 'Error: %j', error );
                         //console.log( response );
                     });
                     console.log( 'Message sent to ' + names[ name ] );
                 } else {
                     console.log( 'Notification type: Default' );
-                    pusher.note( names[ name ], 'Message from #kokarn', text, function( error, response ){
+                    pusher.note( names[ name ], from + ' highlighted you in #kokarn', text, function( error, response ){
                         //console.log( error );
                         //console.log( response );
                     });
