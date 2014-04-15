@@ -66,3 +66,4 @@ DagensMix.prototype.add = function( mix, from ) {
 };
 
 module.exports = DagensMix;
+module.exports = DagensMix;
