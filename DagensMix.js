@@ -56,6 +56,7 @@ DagensMix.prototype.addListener = function(cb) {
 DagensMix.prototype.say = function say () {
     this.bot.say( this.channel, this.currentMix );
 }
+};
 
 DagensMix.prototype.add = function( mix, from ) {
     this.mixes.push(this.currentMix);
@@ -65,4 +66,3 @@ DagensMix.prototype.add = function( mix, from ) {
 };
 
 module.exports = DagensMix;
-
