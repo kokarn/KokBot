@@ -7,7 +7,6 @@ var config = {
     bot = new irc.Client(config.server, config.botName, {
         channels: config.channels
     }),
-    mix = 'Kokarn: Lägg in dagens mix!',
     names = {
         'kokarn' : 'ujz7gGxaa4adjzWIEVDzOK',
         'gyran' : 'gustav.ahlberg@gmail.com',
@@ -17,7 +16,8 @@ var config = {
     pusher = new PushBullet( 'v19INs18gL8IWynPqNbmWXns9TErz4k1aBujz7gGxaa4a' ),
     handlePushbulletRespone = function( error, response ){
 
-    };
+    },
+    dagensMix = new (require( './DagensMix.js' ))();
 
 PushBullet.prototype.friendNode = function friendNote( email, title, body, callback ) {
     'use strict';
@@ -28,6 +28,8 @@ PushBullet.prototype.friendNode = function friendNote( email, title, body, callb
         body: body
     }, callback);
 };
+
+dagensMix.addBot(bot);
 
 /*
  // Listen for joins
@@ -62,23 +64,6 @@ bot.addListener( 'message#kokarn', function( from, text, message ) {
                 }
             }
         }
-    }
-});
-
-// say todays mix
-bot.addListener( 'message', function( from, to, text, message ) {
-    'use strict';
-    if ( text === '!mix' ) {
-        bot.say( config.channels[ 0 ], mix );
-    }
-});
-
-// save todays mix
-bot.addListener( 'message#kokarn', function( from, text, message ) {
-    'use strict';
-    if ( text.substring( 0, 7 ) === '!addmix' ) {
-        mix = text.substring( 8 );
-        bot.say( config.channels[ 0 ], 'Tack ' + from + ' nu blir det dunkadunka!' );
     }
 });
 
