@@ -1,12 +1,12 @@
 module.exports = function (grunt) {
-    "use strict";
+    'use strict';
 
     grunt.initConfig({
         pkg: grunt.file.readJSON( 'package.json' ),
         jshint: {
             all: [
-                "Gruntfile.js",
-                "bot.js"
+                'Gruntfile.js',
+                'bot.js',
                 'DagensMix.js'
             ],
             options: {
