@@ -1,3 +1,4 @@
+'use strict';
 var util = require( 'util' ),
     defaultConfig = {
         response: 'Tack %s! Nu blir det dunkadunka!',
