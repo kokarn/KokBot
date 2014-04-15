@@ -10,9 +10,9 @@ var util = require( 'util' ),
 
 function configOption ( config, option ) {
     if ( option in config ) {
-        return config[option];
+        return config[ option ];
     }
-    return defaultConfig[option];
+    return defaultConfig[ option ];
 }
 
 function DagensMix ( config ) {
@@ -29,19 +29,19 @@ function DagensMix ( config ) {
     this.response = configOption( config, 'response' );
 }
 
-DagensMix.prototype.addBot = function(bot) {
+DagensMix.prototype.addBot = function( bot ) {
     this.bot = bot;
 
     var instance = this;
     // say mix
-    this.addListener( function ( from, text, message) {
-        if (text === instance.sayCommand) {
+    this.addListener( function ( from, text, message ) {
+        if ( text === instance.sayCommand ) {
             instance.say();
         }
     });
 
     // add mix
-    this.addListener( function ( from, text, message) {
+    this.addListener( function ( from, text, message ) {
         if ( text.indexOf( instance.addCommand ) === 0 ) {
             var mix = text.substring( instance.addCommand.length );
             instance.add( mix, from );
@@ -49,21 +49,19 @@ DagensMix.prototype.addBot = function(bot) {
     });
 };
 
-DagensMix.prototype.addListener = function(cb) {
-    this.bot.addListener( 'message' + this.channel, cb);
+DagensMix.prototype.addListener = function( cb ) {
+    this.bot.addListener( 'message' + this.channel, cb );
 };
 
-DagensMix.prototype.say = function say () {
+DagensMix.prototype.say = function say() {
     this.bot.say( this.channel, this.currentMix );
-}
 };
 
 DagensMix.prototype.add = function( mix, from ) {
-    this.mixes.push(this.currentMix);
+    this.mixes.push( this.currentMix );
     this.currentMix = mix;
 
-    this.bot.say( this.channel, util.format(this.response, from));
+    this.bot.say( this.channel, util.format( this.response, from ) );
 };
 
-module.exports = DagensMix;
 module.exports = DagensMix;
