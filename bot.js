@@ -1,3 +1,4 @@
+'use strict';
 var config = {
         channels: [ '#kokarn' ],
         server: 'irc.freenode.net',
@@ -20,7 +21,6 @@ var config = {
     dagensMix = new (require( './DagensMix.js' ))();
 
 PushBullet.prototype.friendNode = function friendNote( email, title, body, callback ) {
-    'use strict';
     this.push({
         email: email,
         type: 'note',
@@ -47,7 +47,6 @@ dagensMix.addBot(bot);
  */
 
 bot.addListener( 'message#kokarn', function( from, text, message ) {
-    'use strict';
     var name;
     for( name in names ){
         if( names.hasOwnProperty( name ) ){
@@ -68,6 +67,5 @@ bot.addListener( 'message#kokarn', function( from, text, message ) {
 });
 
 bot.addListener( 'error', function( message ) {
-    'use strict';
     console.log( 'error: ', message );
 });
