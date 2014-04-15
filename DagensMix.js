@@ -20,7 +20,6 @@ function DagensMix ( config ) {
         config = {};
     }
 
-    this.bot = bot;
     this.currentMix = configOption( config, 'initMix' );
     this.mixes = [];
     this.channel = configOption( config, 'channel' );
