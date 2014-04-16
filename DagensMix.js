@@ -15,18 +15,43 @@ function configOption ( config, option ) {
     return defaultConfig[ option ];
 }
 
+function today () {
+    var now = new Date();
+    return now - ( now % 86400000 );
+}
+
 function DagensMix ( config ) {
     if ( !config ) {
         config = {};
     }
-
-    this.currentMix = configOption( config, 'initMix' );
     this.mixes = [];
+
+    this.initMix = configOption( config, 'initMix' );
     this.channel = configOption( config, 'channel' );
     this.addCommand = configOption( config, 'addCommand' );
     this.sayCommand = configOption( config, 'sayCommand' );
     this.response = configOption( config, 'response' );
+
+    this.resetTimer = 0;
+    this.addMix(this.initMix);
+
+    this.dayMixAdded = today();
+
+    // start reset timeouts
+    this.reset();
 }
+
+DagensMix.prototype.reset = function() {
+    var instance = this;
+
+    if ( this.dayMixAdded < today() ) {
+        this.addMix( this.initMix );
+    }
+
+    this.resetTimer = setTimeout( function () {
+        instance.reset();
+    }, 300000 );
+};
 
 DagensMix.prototype.addBot = function( bot ) {
     this.bot = bot;
@@ -48,6 +73,11 @@ DagensMix.prototype.addBot = function( bot ) {
     });
 };
 
+DagensMix.prototype.addMix = function ( mix ) {
+    this.mixes.push( mix );
+    this.currentMix = mix;
+};
+
 DagensMix.prototype.addListener = function( cb ) {
     this.bot.addListener( 'message' + this.channel, cb );
 };
@@ -57,8 +87,7 @@ DagensMix.prototype.say = function say() {
 };
 
 DagensMix.prototype.add = function( mix, from ) {
-    this.mixes.push( this.currentMix );
-    this.currentMix = mix;
+    this.addMix( mix );
 
     this.bot.say( this.channel, util.format( this.response, from ) );
 };
