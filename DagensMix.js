@@ -35,8 +35,6 @@ function DagensMix ( config ) {
     this.resetTimer = 0;
     this.addMix(this.initMix);
 
-    this.dayMixAdded = today();
-
     // start reset timeouts
     this.reset();
 }
@@ -76,6 +74,7 @@ DagensMix.prototype.addBot = function( bot ) {
 DagensMix.prototype.addMix = function ( mix ) {
     this.mixes.push( mix );
     this.currentMix = mix;
+    this.dayMixAdded = today();
 };
 
 DagensMix.prototype.addListener = function( cb ) {
