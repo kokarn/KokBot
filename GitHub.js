@@ -8,7 +8,7 @@ var util = require( 'util' ),
             'theseal' : false,
             'jwilsson' : false
         },
-        channel : '#kokarndev',
+        channel : '#kokarn',
         loadInterval : false,
         githubConfig : false,
         start : function(){
