@@ -18,7 +18,8 @@ var config = {
     handlePushbulletRespone = function( error, response ){
 
     },
-    dagensMix = new ( require( './DagensMix.js' ) )();
+    dagensMix = new ( require( './DagensMix.js' ) )(),
+    gitHub = require( './GitHub.js' );
 
 PushBullet.prototype.friendNode = function friendNote( email, title, body, callback ) {
     this.push({
@@ -30,6 +31,7 @@ PushBullet.prototype.friendNode = function friendNote( email, title, body, callb
 };
 
 dagensMix.addBot( bot );
+gitHub.setup( bot );
 
 /*
  // Listen for joins
