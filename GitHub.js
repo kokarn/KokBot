@@ -2,11 +2,23 @@
 var util = require( 'util' ),
     https = require( 'https' ),
     GitHub = {
-        userActions : {
-            'kokarn': false,
-            'gyran' : false,
-            'theseal' : false,
-            'jwilsson' : false
+        users : {
+            kokarn : {
+                nick : 'Kokarn',
+                id : false
+            },
+            gyran : {
+                nick: 'Gyran',
+                id : false
+            },
+            theseal: {
+                nick : 'TheSeal',
+                id : false
+            },
+            jwilsson : {
+                nick : 'McGurk',
+                id : false
+            }
         },
         channel : '#kokarn',
         loadInterval : false,
@@ -32,7 +44,7 @@ var util = require( 'util' ),
             var message = false,
                 commitText = 'commit';
 
-            if( this.userActions[ user ] !== false ){
+            if( this.users[ user ].id !== false ){
                 switch( responseData[ 0 ].type ){
                     case 'PushEvent':
 
@@ -40,12 +52,12 @@ var util = require( 'util' ),
                             commitText = commitText + 's';
                         }
 
-                        message = responseData[ 0 ].actor.login + ' pushed ' + responseData[ 0 ].payload.commits.length + ' ' + commitText + ' to ' + responseData[ 0 ].repo.name;
+                        message = this.users[ user ].nick + ' pushed ' + responseData[ 0 ].payload.commits.length + ' ' + commitText + ' to ' + responseData[ 0 ].repo.name;
                         break;
                     case 'CreateEvent':
                         switch( responseData[ 0 ].payload.ref_type ){
                             case 'repository':
-                                message = responseData[ 0 ].actor.login + ' created repository ' + responseData[ 0 ].repo.name;
+                                message = this.users[ user ].nick + ' created repository ' + responseData[ 0 ].repo.name;
                                 break;
                             case 'branch':
                             default:
@@ -53,7 +65,7 @@ var util = require( 'util' ),
                         }
                         break;
                     case 'PullRequestEvent' :
-                        message = responseData[ 0 ].actor.login + ' created a pull request for ' + responseData[ 0 ].repo.name + ' titled "' + responseData[ 0 ].payload.pull_request.title + '"';
+                        message = this.users[ user ].nick + ' created a pull request for ' + responseData[ 0 ].repo.name + ' titled "' + responseData[ 0 ].payload.pull_request.title + '"';
                         break;
                     case 'IssueCommentEvent':
                     default:
@@ -61,7 +73,7 @@ var util = require( 'util' ),
                 }
             }
 
-            this.userActions[ user ] = responseData[ 0 ].id;
+            this.users[ user ].id = responseData[ 0 ].id;
 
             if( message !== false ){
                 this.say( message );
@@ -71,8 +83,8 @@ var util = require( 'util' ),
             this.bot.say( this.channel, message );
         },
         getAllUsers : function(){
-            for( var user in GitHub.userActions ){
-                if( GitHub.userActions.hasOwnProperty( user ) ){
+            for( var user in GitHub.users ){
+                if( GitHub.users.hasOwnProperty( user ) ){
                     GitHub.getUserEvents( user );
                 }
             }
@@ -103,7 +115,7 @@ var util = require( 'util' ),
                     response.on( 'end', function(){
                         latestParsedResponse = JSON.parse( latestResponse );
 
-                        if( latestParsedResponse[ 0 ].id !== GitHub.userActions[ user ] ){
+                        if( latestParsedResponse[ 0 ].id !== GitHub.users[ user ].id ){
                             GitHub.handleResponse( latestParsedResponse, user );
                         }
                     });
