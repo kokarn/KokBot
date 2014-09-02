@@ -80,6 +80,7 @@ var util = require( 'util' ),
             }
         },
         say : function( message ){
+            message = '\u0002GitHub:\u000F ' + message;
             this.bot.say( this.channel, message );
         },
         getAllUsers : function(){
