@@ -19,7 +19,6 @@ var https = require( 'https' ),
                 id : false
             }
         },
-        channel : '#kokarn',
         loadInterval : false,
         githubConfig : false,
         start : function(){
@@ -91,7 +90,13 @@ var https = require( 'https' ),
         },
         say : function( message ){
             message = '\u0002GitHub:\u000F ' + message;
-            this.bot.say( this.channel, message );
+
+            // Say this in every channel it's connected to
+            for( var channel in this.bot.opt.channels ){
+                if( this.bot.opt.channels.hasOwnProperty( channel ) ){
+                    this.bot.say( this.bot.opt.channels[ channel ], message );
+                }
+            }
         },
         getAllUsers : function(){
             for( var user in GitHub.users ){
