@@ -7,4 +7,11 @@ Just an easy node bot for our own channel
 
 Uses [Node IRC](https://github.com/martynsmith/node-irc) for it's communication with the channel.
 
-Currently supports notifications via [Pushbullet](http://pushbullet.com)
+**Current support**
+
+* Notifications via [Pushbullet](http://pushbullet.com)
+* Todays music mix
+* GitHub activity monitor
+
+
+Developed with regrets by: @Kokarn, @gyran & @jwilsson
