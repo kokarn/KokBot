@@ -34,21 +34,6 @@ PushBullet.prototype.friendNode = function friendNote( email, title, body, callb
 dagensMix.addBot( bot );
 gitHub.setup( bot );
 
-/*
- // Listen for joins
- bot.addListener("join", function(channel, who) {
- // Welcome them in!
- bot.say(channel, who + "...dude...welcome back!");
- });
- */
-
-/*
- // Listen for any message, PM said user when he posts
- bot.addListener( "message", function(from, to, text, message) {
- bot.say(from, "¿Que?");
- });
- */
-
 bot.addListener( 'message#kokarn', function( from, text, message ) {
     var name;
     for( name in names ){

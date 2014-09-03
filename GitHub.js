@@ -1,6 +1,5 @@
 'use strict';
-var util = require( 'util' ),
-    https = require( 'https' ),
+var https = require( 'https' ),
     GitHub = {
         users : {
             kokarn : {
@@ -20,7 +19,6 @@ var util = require( 'util' ),
                 id : false
             }
         },
-        channel : '#kokarn',
         loadInterval : false,
         githubConfig : false,
         start : function(){
@@ -67,7 +65,18 @@ var util = require( 'util' ),
                     case 'PullRequestEvent' :
                         message = this.users[ user ].nick + ' created a pull request for ' + responseData[ 0 ].repo.name + ' titled "' + responseData[ 0 ].payload.pull_request.title + '"';
                         break;
+                    case 'IssuesEvent':
+                        switch( responseData[ 0 ].payload.action ){
+                            case 'opened':
+                                message = this.users[ user ].nick + ' created an issue for ' + responseData[ 0 ].repo.name + ' titled "' + responseData[ 0 ].payload.pull_request.title + '"';
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
                     case 'IssueCommentEvent':
+                        //message = this.users[ user ].nick + ' commented on an issue for ' + responseData[ 0 ].repo.name;
+                        //break;
                     default:
                         break;
                 }
@@ -81,7 +90,13 @@ var util = require( 'util' ),
         },
         say : function( message ){
             message = '\u0002GitHub:\u000F ' + message;
-            this.bot.say( this.channel, message );
+
+            // Say this in every channel it's connected to
+            for( var channel in this.bot.opt.channels ){
+                if( this.bot.opt.channels.hasOwnProperty( channel ) ){
+                    this.bot.say( this.bot.opt.channels[ channel ], message );
+                }
+            }
         },
         getAllUsers : function(){
             for( var user in GitHub.users ){
