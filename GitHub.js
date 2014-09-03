@@ -1,6 +1,5 @@
 'use strict';
-var util = require( 'util' ),
-    https = require( 'https' ),
+var https = require( 'https' ),
     GitHub = {
         users : {
             kokarn : {
