@@ -66,6 +66,15 @@ var https = require( 'https' ),
                     case 'PullRequestEvent' :
                         message = this.users[ user ].nick + ' created a pull request for ' + responseData[ 0 ].repo.name + ' titled "' + responseData[ 0 ].payload.pull_request.title + '"';
                         break;
+                    case 'IssuesEvent':
+                        switch( responseData[ 0 ].payload.action ){
+                            case 'opened':
+                                message = this.users[ user ].nick + ' created an issue for ' + responseData[ 0 ].repo.name + ' titled "' + responseData[ 0 ].payload.pull_request.title + '"';
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
                     case 'IssueCommentEvent':
                     default:
                         break;
