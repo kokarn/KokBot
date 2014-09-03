@@ -11,7 +11,8 @@ var config = {
     names = {
         'kokarn' : 'ujz7gGxaa4adjzWIEVDzOK',
         'gyran' : 'gustav.ahlberg@gmail.com',
-        'theseal' : 'johancarlquist@gmail.com'
+        'theseal' : 'johancarlquist@gmail.com',
+        'mcgurk' : 'ujBOoNP894SsjzWIEVDzOK'
     },
     PushBullet = require( 'pushbullet' ),
     pusher = new PushBullet( 'v19INs18gL8IWynPqNbmWXns9TErz4k1aBujz7gGxaa4a' ),
