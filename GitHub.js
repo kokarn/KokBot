@@ -76,6 +76,8 @@ var https = require( 'https' ),
                         }
                         break;
                     case 'IssueCommentEvent':
+                        //message = this.users[ user ].nick + ' commented on an issue for ' + responseData[ 0 ].repo.name;
+                        //break;
                     default:
                         break;
                 }
