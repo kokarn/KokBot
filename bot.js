@@ -1,8 +1,8 @@
 'use strict';
 var config = {
-        channels: [ '#kokarn' ],
+        channels: [ '#kokarndev' ],
         server: 'irc.freenode.net',
-        botName: 'KokBot'
+        botName: 'KokBotdev'
     },
     irc = require( 'irc' ),
     bot = new irc.Client(config.server, config.botName, {

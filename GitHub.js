@@ -21,6 +21,10 @@ var https = require( 'https' ),
         },
         loadInterval : false,
         githubConfig : false,
+        characters : {
+            'lastMessage' : '┗',
+            'message' : '┣'
+        },
         start : function(){
             GitHub.getAllUsers();
 
@@ -40,7 +44,8 @@ var https = require( 'https' ),
         },
         handleResponse : function( responseData, user ){
             var message = false,
-                commitText = 'commit';
+                commitText = 'commit',
+                messageStart;
 
             if( this.users[ user ].id !== false ){
                 switch( responseData[ 0 ].type ){
@@ -49,8 +54,17 @@ var https = require( 'https' ),
                         if( responseData[ 0 ].payload.commits.length > 1 ){
                             commitText = commitText + 's';
                         }
-
                         message = this.users[ user ].nick + ' pushed ' + responseData[ 0 ].payload.commits.length + ' ' + commitText + ' to ' + responseData[ 0 ].repo.name;
+                        for( var i = 0; i < responseData[ 0 ].payload.commits.length; i = i + 1 ){
+                            messageStart = '    ';
+                            if( i === responseData[ 0 ].payload.commits.length - 1 ){
+                                messageStart = messageStart + this.characters.lastMessage + '   ';
+                            } else {
+                                messageStart = messageStart + this.characters.message + '   ';
+                            }
+
+                            message = message + '\n' + messageStart + responseData[ 0 ].payload.commits[ i ].message;
+                        }
                         break;
                     case 'CreateEvent':
                         switch( responseData[ 0 ].payload.ref_type ){
