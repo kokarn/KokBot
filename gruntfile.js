@@ -7,7 +7,8 @@ module.exports = function (grunt) {
             all: [
                 'Gruntfile.js',
                 'bot.js',
-                'DagensMix.js'
+                'DagensMix.js',
+                'GitHub.js'
             ],
             options: {
                 jshintrc: '.jshintrc'
