@@ -52,6 +52,8 @@ var https = require( 'https' ),
             return myString;
         },
         handleResponse : function( responseData, user ){
+            // We can't use camelCase here because of the vars coming from GitHub
+            /*jshint camelcase: false */
             var message = false,
                 commitText = 'commit',
                 messageStart,
@@ -84,6 +86,7 @@ var https = require( 'https' ),
                                 message = this.users[ user ].nick + ' created repository ' + responseData[ 0 ].repo.name;
                                 break;
                             case 'branch':
+                                /* falls through */
                             default:
                                 break;
                         }
@@ -103,6 +106,7 @@ var https = require( 'https' ),
                     case 'IssueCommentEvent':
                         //message = this.users[ user ].nick + ' commented on an issue for ' + responseData[ 0 ].repo.name;
                         //break;
+                        /* falls through */
                     default:
                         break;
                 }
@@ -138,7 +142,7 @@ var https = require( 'https' ),
             https.get( {
                     hostname: 'api.github.com',
                     port: 443,
-                    path: '/users/' + user + '/events?client_id=' + this.githubConfig.client_id + '&client_secret=' + this.githubConfig.client_secret,
+                    path: '/users/' + user + '/events?client_id=' + this.githubConfig.clientId + '&client_secret=' + this.githubConfig.clientSecret,
                     method: 'GET',
                     headers: {
                         'User-Agent': 'Kokarn'
