@@ -42,10 +42,20 @@ var https = require( 'https' ),
                 this.start();
             }
         },
+        rightPad: function ( myString, size, character ) {
+            myString = myString.toString();
+
+            while( myString.length < size ) {
+                myString = myString + character;
+            }
+
+            return myString;
+        },
         handleResponse : function( responseData, user ){
             var message = false,
                 commitText = 'commit',
-                messageStart;
+                messageStart,
+                commitMessage;
 
             if( this.users[ user ].id !== false ){
                 switch( responseData[ 0 ].type ){
@@ -63,7 +73,9 @@ var https = require( 'https' ),
                                 messageStart = messageStart + this.characters.message + '   ';
                             }
 
-                            message = message + '\n' + messageStart + responseData[ 0 ].payload.commits[ i ].message;
+                            commitMessage = responseData[ 0 ].payload.commits[ i ].message.replace( /(\r\n|\n\r|\n\n|\r\r|\r|\n)/gm, this.rightPad( '\n', messageStart.length + 1, ' ' ) );
+
+                            message = message + '\n' + messageStart + commitMessage;
                         }
                         break;
                     case 'CreateEvent':
