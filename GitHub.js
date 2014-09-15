@@ -161,7 +161,7 @@ var https = require( 'https' ),
                     response.on( 'end', function(){
                         latestParsedResponse = JSON.parse( latestResponse );
 
-                        if( latestParsedResponse[ 0 ].id !== GitHub.users[ user ].id ){
+                        if( typeof latestParsedResponse[ 0 ].id !== "undefined" && latestParsedResponse[ 0 ].id !== GitHub.users[ user ].id ){
                             GitHub.handleResponse( latestParsedResponse, user );
                         }
                     });
