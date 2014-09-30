@@ -149,9 +149,9 @@ var https = require( 'https' ),
                     path: '/users/' + user + '/events?client_id=' + this.githubConfig.clientId + '&client_secret=' + this.githubConfig.clientSecret,
                     method: 'GET',
                     headers: {
-                        'User-Agent': 'Kokarn'
                     }
                 } );
+                    'User-Agent': 'KokBot'
 
             request.on( 'error', function( data ){
                 console.log( data );
