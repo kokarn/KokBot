@@ -153,6 +153,10 @@ var https = require( 'https' ),
                     }
                 } );
 
+            request.on( 'error', function( data ){
+                console.log( data );
+            });
+
             request.on( 'response', function( response ) {
                 console.log( 'Got response ' + response.statusCode + ' for user "' + user + '". Request remaining until reset: ' + response.headers[ 'x-ratelimit-remaining' ] );
 
