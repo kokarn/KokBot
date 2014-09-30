@@ -129,9 +129,12 @@ var https = require( 'https' ),
             }
         },
         getAllUsers : function(){
+            var index = 0;
+
             for( var user in GitHub.users ){
                 if( GitHub.users.hasOwnProperty( user ) ){
-                    GitHub.getUserEvents( user );
+                    setTimeout( GitHub.getUserEvents( user ), index * 1000 );
+                    index = index + 1;
                 }
             }
         },
