@@ -164,10 +164,6 @@ var https = require( 'https' ),
                     latestResponse = latestResponse + chunk.toString();
                 });
 
-                response.on( 'error' , function( data ) {
-                    console.log( data );
-                });
-
                 response.on( 'end', function(){
                     latestParsedResponse = JSON.parse( latestResponse );
 
