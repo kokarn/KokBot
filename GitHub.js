@@ -140,9 +140,10 @@ var https = require( 'https' ),
         },
         getUserEvents : function( user ){
             var latestResponse = '',
-                latestParsedResponse = '';
+                latestParsedResponse = '',
+                request;
 
-            https.get( {
+            request = https.get( {
                     hostname: 'api.github.com',
                     port: 443,
                     path: '/users/' + user + '/events?client_id=' + this.githubConfig.clientId + '&client_secret=' + this.githubConfig.clientSecret,
@@ -150,26 +151,27 @@ var https = require( 'https' ),
                     headers: {
                         'User-Agent': 'Kokarn'
                     }
-                }, function( response ) {
-                    console.log( 'Got response ' + response.statusCode + ' for user "' + user + '". Request remaining until reset: ' + response.headers[ 'x-ratelimit-remaining' ] );
+                } );
 
-                    response.on( 'data' , function( chunk ) {
-                        latestResponse = latestResponse + chunk.toString();
-                    });
+            request.on( 'response', function( response ) {
+                console.log( 'Got response ' + response.statusCode + ' for user "' + user + '". Request remaining until reset: ' + response.headers[ 'x-ratelimit-remaining' ] );
 
-                    response.on( 'error' , function( data ) {
-                        console.log( data );
-                    });
+                response.on( 'data' , function( chunk ) {
+                    latestResponse = latestResponse + chunk.toString();
+                });
 
-                    response.on( 'end', function(){
-                        latestParsedResponse = JSON.parse( latestResponse );
+                response.on( 'error' , function( data ) {
+                    console.log( data );
+                });
 
-                        if( typeof latestParsedResponse[ 0 ].id !== 'undefined' && latestParsedResponse[ 0 ].id !== GitHub.users[ user ].id ){
-                            GitHub.handleResponse( latestParsedResponse, user );
-                        }
-                    });
-                }
-            );
+                response.on( 'end', function(){
+                    latestParsedResponse = JSON.parse( latestResponse );
+
+                    if( typeof latestParsedResponse[ 0 ].id !== 'undefined' && latestParsedResponse[ 0 ].id !== GitHub.users[ user ].id ){
+                        GitHub.handleResponse( latestParsedResponse, user );
+                    }
+                });
+            });
         }
     };
 
