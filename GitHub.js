@@ -143,15 +143,15 @@ var https = require( 'https' ),
                 latestParsedResponse = '',
                 request;
 
-            request = https.get( {
-                    hostname: 'api.github.com',
-                    port: 443,
-                    path: '/users/' + user + '/events?client_id=' + this.githubConfig.clientId + '&client_secret=' + this.githubConfig.clientSecret,
-                    method: 'GET',
-                    headers: {
-                    }
-                } );
+            request = https.get({
+                hostname: 'api.github.com',
+                port: 443,
+                path: '/users/' + user + '/events?client_id=' + this.githubConfig.clientId + '&client_secret=' + this.githubConfig.clientSecret,
+                method: 'GET',
+                headers: {
                     'User-Agent': 'KokBot'
+                }
+            });
 
             request.on( 'error', function( data ){
                 console.log( data );
