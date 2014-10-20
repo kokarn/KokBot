@@ -6,7 +6,7 @@ var PushBullet = require( 'pushbullet' ),
     },
     localPushbullet = {
         bot : false,
-        names : {
+        nameList : {
             'kokarn' : 'ujz7gGxaa4adjzWIEVDzOK',
             'gyran' : 'gustav.ahlberg@gmail.com',
             'theseal' : 'johancarlquist@gmail.com',
@@ -25,34 +25,32 @@ var PushBullet = require( 'pushbullet' ),
         },
         handleMessage : function( from, text, message ){
             var name,
-                _this = this;
+                _this = localPushbullet;
 
-            for( name in _this.names ){
-                if( _this.names.hasOwnProperty( name ) ){
+            for( name in _this.nameList ){
+                if( _this.nameList.hasOwnProperty( name ) ){
                     if( text.toLowerCase().indexOf( name ) !== -1 ){
-                        console.log( 'Trying to push to ' + _this.names[ name ] );
-                        if( _this.names[ name ].indexOf( '@' ) !== -1 ){
-                            console.log( 'Notification type: Email' );
-                            pusher.friendNode( _this.names[ name ], from + ' highlighted you in #kokarn', text, handlePushbulletRespone );
-                            console.log( 'Message sent to ' + _this.names[ name ] );
-                        } else {
-                            console.log( 'Notification type: Default' );
-                            pusher.note( _this.names[ name ], from + ' highlighted you in #kokarn', text, handlePushbulletRespone );
-                            console.log( 'Message sent to ' + _this.names[ name ] );
-                        }
+                        console.log( 'Trying to push to ' + _this.nameList[ name ] );
+                        _this.sendMessage( _this.nameList[ name ], from, text );
                     }
                 }
             }
+        },
+        sendMessage : function( to, from, message ){
+            pusher.note( to, from + ' highlighted you in #kokarn', message, handlePushbulletRespone );
+            console.log( 'Message sent to ' + to );
         }
     };
 
+/*
 PushBullet.prototype.friendNode = function friendNote( email, title, body, callback ) {
-    this.push({
+    this.push( {
         email: email,
         type: 'note',
         title: title,
         body: body
-    }, callback);
+    }, callback );
 };
+*/
 
 module.exports = localPushbullet;
