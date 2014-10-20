@@ -5,9 +5,9 @@ var config = {
         botName: 'KokBot'
     },
     irc = require( 'irc' ),
-    bot = new irc.Client(config.server, config.botName, {
+    bot = new irc.Client( config.server, config.botName, {
         channels: config.channels
-    }),
+    } ),
     dagensMix = new ( require( './DagensMix.botplug.js' ) )(),
     gitHub = require( './GitHub.botplug.js' ),
     pushbullet = require( './Pushbullet.botplug.js' );
