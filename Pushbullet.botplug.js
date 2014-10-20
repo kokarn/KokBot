@@ -42,8 +42,29 @@ var PushBullet = require( 'pushbullet' ),
             }
         },
         sendMessage : function( to, from, message ){
-            pusher.note( to, from + ' highlighted you in #kokarn', message, handlePushbulletRespone );
-            console.log( 'Message sent to ' + to );
+            var messageParts,
+                sendMessage;
+
+            if( message.indexOf( 'http://' ) !== -1 || message.indexOf( 'https://' ) !== -1 ){
+                messageParts = message.match( /(http.+)/ );
+
+                if( typeof messageParts[ 0 ] !== 'undefined' && messageParts[ 0 ].length > 7 ){
+                    sendMessage = messageParts[ 0 ];
+
+                    pusher.link( to, from + ' sent you a link in #kokarn', sendMessage, function( error, response ){
+                        if( error ){
+                            console.log( 'Failed to send link, sending as note instead' );
+                            pusher.note( to, from + ' highlighted you in #kokarn', message, handlePushbulletRespone );
+                        } else {
+                            console.log( 'Link sent to ' + to );
+                        }
+                    } );
+                }
+            } else {
+                sendMessage = message;
+                pusher.note( to, from + ' highlighted you in #kokarn', sendMessage, handlePushbulletRespone );
+                console.log( 'Note sent to ' + to );
+            }
         }
     };
 
