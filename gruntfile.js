@@ -5,10 +5,8 @@ module.exports = function (grunt) {
         pkg: grunt.file.readJSON( 'package.json' ),
         jshint: {
             all: [
-                'Gruntfile.js',
                 'bot.js',
-                'DagensMix.js',
-                'GitHub.js'
+                '*.botplug.js'
             ],
             options: {
                 jshintrc: '.jshintrc'
