@@ -2,7 +2,12 @@
 var PushBullet = require( 'pushbullet' ),
     pusher = new PushBullet( 'v19INs18gL8IWynPqNbmWXns9TErz4k1aBujz7gGxaa4a' ),
     handlePushbulletRespone = function( error, response ){
-
+        if( error ){
+            console.log( 'Error!' );
+            console.log( error );
+        } else {
+            console.log( response );
+        }
     },
     localPushbullet = {
         bot : false,
