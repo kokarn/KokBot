@@ -16,7 +16,12 @@ var PushBullet = require( 'pushbullet' ),
             var _this = this;
 
             _this.bot = bot;
-            bot.addListener( 'message#kokarn', _this.handleMessage );
+            for( var channel in _this.bot.opt.channels ){
+                if( _this.bot.opt.channels.hasOwnProperty( channel ) ){
+                    bot.addListener( 'message' + this.bot.opt.channels[ channel ], _this.handleMessage );
+                }
+            }
+
         },
         handleMessage : function( from, text, message ){
             var name,
