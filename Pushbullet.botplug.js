@@ -47,15 +47,4 @@ var PushBullet = require( 'pushbullet' ),
         }
     };
 
-/*
-PushBullet.prototype.friendNode = function friendNote( email, title, body, callback ) {
-    this.push( {
-        email: email,
-        type: 'note',
-        title: title,
-        body: body
-    }, callback );
-};
-*/
-
 module.exports = localPushbullet;
