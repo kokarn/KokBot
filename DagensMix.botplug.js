@@ -1,5 +1,6 @@
 'use strict';
 var util = require( 'util' ),
+    twitterAPI = require( 'node-twitter-api' ),
     defaultConfig = {
         response: 'Tack %s! Nu blir det dunkadunka!',
         initMix: 'Kokarn: Lägg in dagens mix!',
@@ -80,10 +81,35 @@ DagensMix.prototype.addBot = function( bot ) {
     });
 };
 
+DagensMix.prototype.tweetMix = function( mix ){
+    var config = require( './config.json' )[ 0 ],
+        twitter = new twitterAPI({
+            consumerKey : config.twitterConsumerKey,
+            consumerSecret : config.twitterConsumerSecret
+        });
+
+    twitter.statuses( "update", {
+            status: mix
+        },
+        config.twitterAccessToken,
+        config.twitterAccessTokenSecret,
+        function( error, data, response ) {
+            if( error ) {
+                console.log( error );
+            } else {
+                console.log( 'Tweet successfull' );
+                console.log( data );
+            }
+        }
+    );
+};
+
 DagensMix.prototype.addMix = function ( mix ) {
     this.mixes.push( mix );
     this.currentMix = mix;
     this.dayMixAdded = today();
+
+    this.tweetMix( mix );
 };
 
 DagensMix.prototype.addListener = function( cb ) {
