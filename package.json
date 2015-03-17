@@ -13,15 +13,15 @@
     "url": "kokarn.com"
   },
   "contributors": [
-      {
-        "name": "Gustav Ahlberg"
-      },
-      {
-        "name": "Jonathan Wilsson"
-      },
-      {
-        "name": "Johan Carlquist"
-      }
+    {
+      "name": "Gustav Ahlberg"
+    },
+    {
+      "name": "Jonathan Wilsson"
+    },
+    {
+      "name": "Johan Carlquist"
+    }
   ],
   "scripts": {
     "test": "grunt test"
@@ -35,13 +35,13 @@
   },
   "license": "MIT",
   "dependencies": {
-    "irc": ">=0.3.7",
-    "pushbullet": ">=1.4.1",
-    "node-twitter-api": "^1.5.0"
+    "irc": ">=0.3.9",
+    "node-twitter-api": "^1.5.0",
+    "pushbullet": ">=1.4.3"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
     "grunt-cli": "~0.1.13",
-    "grunt-contrib-jshint": "~0.10.0"
+    "grunt-contrib-jshint": "~0.11.0"
   }
 }
