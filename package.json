@@ -12,6 +12,17 @@
     "email": "kokarn@gmail.com",
     "url": "kokarn.com"
   },
+  "contributors": [
+      {
+        "name": "Gustav Ahlberg"
+      },
+      {
+        "name": "Joakim Wilsson"
+      },
+      {
+        "name": "Johan Carlquist"
+      }
+  ],
   "scripts": {
     "test": "grunt test"
   },
