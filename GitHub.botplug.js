@@ -33,7 +33,7 @@ var https = require( 'https' ),
             }, 60000 );
         },
         setup : function( bot ){
-            this.githubConfig = require( './githubconfig.json' )[ 0 ];
+            this.githubConfig = require( './config.json' )[ 0 ];
             this.bot = bot;
 
             if( this.githubConfig === false ){
