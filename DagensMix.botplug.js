@@ -88,7 +88,7 @@ DagensMix.prototype.tweetMix = function( mix ){
             consumerSecret : config.twitterConsumerSecret
         });
 
-    twitter.statuses( "update", {
+    twitter.statuses( 'update', {
             status: mix
         },
         config.twitterAccessToken,
