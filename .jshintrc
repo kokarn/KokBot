@@ -9,6 +9,7 @@
     "immed": true,
     "newcap": true,
     "noarg": true,
+    "node": true,
     "noempty": true,
     "nonew": true,
     "plusplus": true,
@@ -21,5 +22,8 @@
     "quotmark": "single",
     "node": true,
     "onevar": true,
-    "passfail": true
+    "passfail": true,
+    "globals": {
+        "JSON": true
+    }
 }

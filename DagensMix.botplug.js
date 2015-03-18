@@ -45,7 +45,7 @@ DagensMix.prototype.reset = function() {
     var instance = this;
 
     if ( this.dayMixAdded < today() ) {
-        this.addMix( this.initMix );
+        this.currentMix = false;
     }
 
     this.resetTimer = setTimeout( function () {
