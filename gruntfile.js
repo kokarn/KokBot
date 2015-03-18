@@ -6,7 +6,8 @@ module.exports = function( grunt ) {
         jshint: {
             all: [
                 'bot.js',
-                '*.botplug.js'
+                '*.botplug.js',
+                'Gruntfile.js'
             ],
             options: {
                 jshintrc: '.jshintrc'
