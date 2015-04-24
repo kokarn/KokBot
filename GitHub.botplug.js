@@ -94,7 +94,7 @@ var https = require( 'https' ),
                                 message = this.users[ user ].nick + ' created repository ' + responseData[ 0 ].repo.html_url;
                                 break;
                             case 'branch':
-                                message = this.users[ user ].nick + ' created a branch for ' + responseData[ 0 ].repo.name + ' called ' + responseData[ 0 ].payload.ref;
+                                message = this.users[ user ].nick + ' created a branch for ' + responseData[ 0 ].repo.html_url + ' called ' + responseData[ 0 ].payload.ref;
                                 break;
                             default:
                                 break;
