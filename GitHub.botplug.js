@@ -42,7 +42,7 @@ var https = require( 'https' ),
                 this.start();
             }
         },
-        rightPad: function ( myString, size, character ) {
+        rightPad : function( myString, size, character ){
             myString = myString.toString();
 
             while( myString.length < size ) {
@@ -50,6 +50,13 @@ var https = require( 'https' ),
             }
 
             return myString;
+        },
+        apiUrlToRealUrl : function( apiUrl ){
+            var realUrl = apiUrl.replace( 'api.github', 'github' );
+
+            realUrl = realUrl.replace( '/repos/', '/' );
+
+            return realUrl;
         },
         handleResponse : function( responseData, user ){
             // We can't use camelCase here because of the vars coming from GitHub
@@ -60,13 +67,16 @@ var https = require( 'https' ),
                 commitMessage;
 
             if( this.users[ user ].id !== false ){
+                responseData[ 0 ].repo.html_url = this.apiUrlToRealUrl( responseData[ 0 ].repo.url );
+                
                 switch( responseData[ 0 ].type ){
                     case 'PushEvent':
 
                         if( responseData[ 0 ].payload.commits.length > 1 ){
                             commitText = commitText + 's';
                         }
-                        message = this.users[ user ].nick + ' pushed ' + responseData[ 0 ].payload.commits.length + ' ' + commitText + ' to ' + responseData[ 0 ].repo.name;
+
+                        message = this.users[ user ].nick + ' pushed ' + responseData[ 0 ].payload.commits.length + ' ' + commitText + ' to ' + responseData[ 0 ].repo.html_url;
                         for( var i = 0; i < responseData[ 0 ].payload.commits.length; i = i + 1 ){
                             messageStart = '    ';
                             if( i === responseData[ 0 ].payload.commits.length - 1 ){
@@ -83,21 +93,22 @@ var https = require( 'https' ),
                     case 'CreateEvent':
                         switch( responseData[ 0 ].payload.ref_type ){
                             case 'repository':
-                                message = this.users[ user ].nick + ' created repository ' + responseData[ 0 ].repo.name;
+                                message = this.users[ user ].nick + ' created repository ' + responseData[ 0 ].repo.html_url;
                                 break;
                             case 'branch':
-                                /* falls through */
+                                message = this.users[ user ].nick + ' created a branch for ' + responseData[ 0 ].repo.html_url + ' called ' + responseData[ 0 ].payload.ref;
+                                break;
                             default:
                                 break;
                         }
                         break;
                     case 'PullRequestEvent' :
-                        message = this.users[ user ].nick + ' created a pull request for ' + responseData[ 0 ].repo.name + ' titled "' + responseData[ 0 ].payload.pull_request.title + '"';
+                        message = this.users[ user ].nick + ' created a pull request for ' + responseData[ 0 ].repo.html_url + ' titled "' + responseData[ 0 ].payload.pull_request.title + '"';
                         break;
                     case 'IssuesEvent':
                         switch( responseData[ 0 ].payload.action ){
                             case 'opened':
-                                message = this.users[ user ].nick + ' created an issue for ' + responseData[ 0 ].repo.name + ' titled "' + responseData[ 0 ].payload.issue.title + '"';
+                                message = this.users[ user ].nick + ' created an issue for ' + responseData[ 0 ].repo.html_url + ' titled "' + responseData[ 0 ].payload.issue.title + '"';
                                 break;
                             default:
                                 break;
