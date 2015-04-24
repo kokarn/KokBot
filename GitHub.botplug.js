@@ -65,6 +65,7 @@ var https = require( 'https' ),
                         if( responseData[ 0 ].payload.commits.length > 1 ){
                             commitText = commitText + 's';
                         }
+
                         message = this.users[ user ].nick + ' pushed ' + responseData[ 0 ].payload.commits.length + ' ' + commitText + ' to ' + responseData[ 0 ].repo.html_url;
                         for( var i = 0; i < responseData[ 0 ].payload.commits.length; i = i + 1 ){
                             messageStart = '    ';
