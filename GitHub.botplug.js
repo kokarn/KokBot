@@ -51,6 +51,13 @@ var https = require( 'https' ),
 
             return myString;
         },
+        apiUrlToRealUrl : function( apiUrl ){
+            var realUrl = apiUrl.replace( 'api.github', 'github' );
+
+            realUrl = realUrl.replace( '/repos/', '/' );
+
+            return realUrl;
+        },
         handleResponse : function( responseData, user ){
             // We can't use camelCase here because of the vars coming from GitHub
             /*jshint camelcase: false */
@@ -60,6 +67,7 @@ var https = require( 'https' ),
                 commitMessage;
 
             if( this.users[ user ].id !== false ){
+                responseData[ 0 ].repo.html_url = this.apiUrlToRealUrl( responseData[ 0 ].repo.url );
                 switch( responseData[ 0 ].type ){
                     case 'PushEvent':
                         if( responseData[ 0 ].payload.commits.length > 1 ){
