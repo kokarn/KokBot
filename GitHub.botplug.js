@@ -68,6 +68,7 @@ var https = require( 'https' ),
 
             if( this.users[ user ].id !== false ){
                 responseData[ 0 ].repo.html_url = this.apiUrlToRealUrl( responseData[ 0 ].repo.url );
+                
                 switch( responseData[ 0 ].type ){
                     case 'PushEvent':
                         if( responseData[ 0 ].payload.commits.length > 1 ){
