@@ -42,7 +42,7 @@ var https = require( 'https' ),
                 this.start();
             }
         },
-        rightPad: function ( myString, size, character ) {
+        rightPad : function( myString, size, character ){
             myString = myString.toString();
 
             while( myString.length < size ) {
@@ -62,7 +62,6 @@ var https = require( 'https' ),
             if( this.users[ user ].id !== false ){
                 switch( responseData[ 0 ].type ){
                     case 'PushEvent':
-
                         if( responseData[ 0 ].payload.commits.length > 1 ){
                             commitText = commitText + 's';
                         }
