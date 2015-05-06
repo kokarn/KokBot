@@ -68,7 +68,7 @@ var https = require( 'https' ),
 
             if( this.users[ user ].id !== false ){
                 responseData[ 0 ].repo.html_url = this.apiUrlToRealUrl( responseData[ 0 ].repo.url );
-                
+
                 switch( responseData[ 0 ].type ){
                     case 'PushEvent':
                         if( responseData[ 0 ].payload.commits.length > 1 ){
@@ -169,6 +169,11 @@ var https = require( 'https' ),
 
             request.on( 'response', function( response ) {
                 console.log( 'Got response ' + response.statusCode + ' for user "' + user + '". Request remaining until reset: ' + response.headers[ 'x-ratelimit-remaining' ] );
+
+                if( response.statusCode !== 200 ){
+                    console.log( 'INVALID RESPONSE, service might be unavailable' )
+                    return false;
+                }
 
                 response.on( 'data' , function( chunk ) {
                     latestResponse = latestResponse + chunk.toString();
