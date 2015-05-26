@@ -7,7 +7,7 @@ var util = require( 'util' ),
         channel: '#kokarn',
         addCommand: '!addmix',
         sayCommand: '!mix',
-        listCommand: '!listmix'
+        listCommands: [ '!listmix', '!mixlist' ]
     };
 
 function configOption ( config, option ) {
@@ -32,7 +32,7 @@ function DagensMix ( config ) {
     this.channel = configOption( config, 'channel' );
     this.addCommand = configOption( config, 'addCommand' );
     this.sayCommand = configOption( config, 'sayCommand' );
-    this.listCommand = configOption( config, 'listCommand' );
+    this.listCommands = configOption( config, 'listCommands' );
     this.response = configOption( config, 'response' );
 
     this.resetTimer = 0;
@@ -75,8 +75,10 @@ DagensMix.prototype.addBot = function( bot ) {
 
     // list mixes
     this.addListener( function ( from, text, message ) {
-        if ( text === instance.listCommand ) {
-            instance.list();
+        for( var i = 0; i < instance.listCommands.length; i = i + 1 ){
+            if ( text === instance.listCommands[ i ] ) {
+                instance.list();
+            }
         }
     });
 };
