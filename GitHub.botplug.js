@@ -10,7 +10,7 @@ var https = require( 'https' ),
                 nick: 'Gyran',
                 id : false
             },
-            theseal: {
+            theseal : {
                 nick : 'TheSeal',
                 id : false
             },
