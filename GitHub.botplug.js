@@ -10,12 +10,16 @@ var https = require( 'https' ),
                 nick: 'Gyran',
                 id : false
             },
-            theseal: {
+            theseal : {
                 nick : 'TheSeal',
                 id : false
             },
             jwilsson : {
                 nick : 'McGurk',
+                id : false
+            },
+            gust1n : {
+                nick : 'gust1n',
                 id : false
             }
         },
