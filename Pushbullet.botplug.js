@@ -12,11 +12,15 @@ var PushBullet = require( 'pushbullet' ),
     localPushbullet = {
         bot : false,
         nameList : {
-            'kokarn' : 'ujz7gGxaa4adjzWIEVDzOK',
-            'gyran' : 'gustav.ahlberg@gmail.com',
-            'theseal' : 'johancarlquist@gmail.com',
-            'mcgurk' : 'jonathan.wilsson@gmail.com',
-            'gust1n' : 'jocke.gustin@gmail.com'
+            kokarn : 'ujz7gGxaa4adjzWIEVDzOK',
+            gyran : 'gustav.ahlberg@gmail.com',
+            theseal : 'johancarlquist@gmail.com',
+            mcgurk : 'jonathan.wilsson@gmail.com',
+            gust1n : 'jocke.gustin@gmail.com'
+        },
+        aliasList : {
+            gustin : 'gust1n',
+            sälen : 'theseal'
         },
         setup : function( bot ){
             var _this = this;
@@ -31,15 +35,34 @@ var PushBullet = require( 'pushbullet' ),
         },
         handleMessage : function( from, text, message ){
             var name,
-                _this = localPushbullet;
+                _this = localPushbullet,
+                namesInMessage = [],
+                i,
+                formattedText = text.toLowerCase();
 
             for( name in _this.nameList ){
                 if( _this.nameList.hasOwnProperty( name ) ){
-                    if( text.toLowerCase().indexOf( name ) !== -1 ){
-                        console.log( 'Trying to push to ' + _this.nameList[ name ] );
-                        _this.sendMessage( _this.nameList[ name ], from, text );
+                    if( formattedText.indexOf( name ) !== -1 ){
+                        if( namesInMessage.indexOf( name ) === -1 ){
+                            namesInMessage.push( name );
+                        }
                     }
                 }
+            }
+
+            for( name in _this.aliasList ){
+                if( _this.aliasList.hasOwnProperty( name ) ){
+                    if( formattedText.indexOf( name ) !== -1 ){
+                        if( namesInMessage.indexOf( name ) === -1 ){
+                            namesInMessage.push( _this.aliasList[ name ] );
+                        }
+                    }
+                }
+            }
+
+            for( i = 0; i < namesInMessage.length; i = i + 1 ){
+                console.log( 'Trying to push to ' + _this.nameList[ namesInMessage[ i ] ] );
+                _this.sendMessage( _this.nameList[ namesInMessage[ i ] ], from, text );
             }
         },
         sendMessage : function( to, from, message ){
