@@ -12,11 +12,11 @@ var PushBullet = require( 'pushbullet' ),
     localPushbullet = {
         bot : false,
         nameList : {
-            'kokarn' : 'ujz7gGxaa4adjzWIEVDzOK',
-            'gyran' : 'gustav.ahlberg@gmail.com',
-            'theseal' : 'johancarlquist@gmail.com',
-            'mcgurk' : 'jonathan.wilsson@gmail.com',
-            'gust1n' : 'jocke.gustin@gmail.com'
+            kokarn : 'ujz7gGxaa4adjzWIEVDzOK',
+            gyran : 'gustav.ahlberg@gmail.com',
+            theseal : 'johancarlquist@gmail.com',
+            mcgurk : 'jonathan.wilsson@gmail.com',
+            gust1n : 'jocke.gustin@gmail.com'
         },
         setup : function( bot ){
             var _this = this;
