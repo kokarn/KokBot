@@ -31,13 +31,14 @@ var PushBullet = require( 'pushbullet' ),
         },
         handleMessage : function( from, text, message ){
             var name,
-                _this = localPushbullet;
+                _this = localPushbullet,
+                formattedText = text.toLowerCase();
 
             for( name in _this.nameList ){
                 if( _this.nameList.hasOwnProperty( name ) ){
-                    if( text.toLowerCase().indexOf( name ) !== -1 ){
                         console.log( 'Trying to push to ' + _this.nameList[ name ] );
                         _this.sendMessage( _this.nameList[ name ], from, text );
+                    if( formattedText.indexOf( name ) !== -1 ){
                     }
                 }
             }
