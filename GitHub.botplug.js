@@ -17,6 +17,10 @@ var https = require( 'https' ),
             jwilsson : {
                 nick : 'McGurk',
                 id : false
+            },
+            gust1n : {
+                nick : 'gust1n',
+                id : false
             }
         },
         loadInterval : false,
