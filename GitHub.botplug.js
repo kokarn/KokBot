@@ -75,6 +75,7 @@ var https = require( 'https' ),
 
                 switch( responseData[ 0 ].type ){
                     case 'PushEvent':
+
                         if( responseData[ 0 ].payload.commits.length > 1 ){
                             commitText = commitText + 's';
                         }
