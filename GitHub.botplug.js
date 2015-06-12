@@ -103,6 +103,9 @@ var https = require( 'https' ),
                             case 'branch':
                                 message = this.users[ user ].nick + ' created a branch for ' + responseData[ 0 ].repo.html_url + ' called ' + responseData[ 0 ].payload.ref;
                                 break;
+                            case 'tag':
+                                message = this.users[ user ].nick + ' created a tag for ' + responseData[ 0 ].repo.html_url + ' called ' + responseData[ 0 ].payload.ref;
+                                break;
                             default:
                                 break;
                         }
