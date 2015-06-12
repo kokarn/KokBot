@@ -61,8 +61,12 @@ var PushBullet = require( 'pushbullet' ),
             }
 
             for( i = 0; i < namesInMessage.length; i = i + 1 ){
-                console.log( 'Trying to push to ' + _this.nameList[ namesInMessage[ i ] ] );
-                _this.sendMessage( _this.nameList[ namesInMessage[ i ] ], from, text );
+                if( _this.nameList[ namesInMessage[ i ] ] === from.toLowerCase() ){
+                    console.log( 'Found a message from ' + from + ' with ' + from + ' in it, skipping push to that recipient.' );
+                } else {
+                    console.log( 'Trying to push to ' + _this.nameList[ namesInMessage[ i ] ] );
+                    _this.sendMessage( _this.nameList[ namesInMessage[ i ] ], from, text );
+                }
             }
         },
         sendMessage : function( to, from, message ){
