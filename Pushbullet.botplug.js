@@ -20,7 +20,8 @@ var PushBullet = require( 'pushbullet' ),
         },
         aliasList : {
             gustin : 'gust1n',
-            sälen : 'theseal'
+            sälen : 'theseal',
+            jwilsson : 'mcgurk'
         },
         setup : function( bot ){
             var _this = this;
