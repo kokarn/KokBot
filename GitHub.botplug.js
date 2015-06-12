@@ -119,8 +119,7 @@ var https = require( 'https' ),
                         }
                         break;
                     case 'ForkEvent':
-                            message = this.users[ user ].nick + ' forked repository ' + responseData[ 0 ].payload.forkee.name + ' from ' + responseData[ 0 ].repo.name;
-                            break;
+                        message = this.users[ user ].nick + ' forked repository ' + responseData[ 0 ].payload.forkee.name + ' from ' + responseData[ 0 ].repo.name;
                         break;
                     case 'IssueCommentEvent':
                         //message = this.users[ user ].nick + ' commented on an issue for ' + responseData[ 0 ].repo.name;
