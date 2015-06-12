@@ -16,6 +16,6 @@ dagensMix.addBot( bot );
 gitHub.setup( bot );
 pushbullet.setup( bot );
 
-bot.addListener( 'error', function( message ) {
+bot.addListener( 'error', function( message ){
     console.log( 'error: ', message );
 });
