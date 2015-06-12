@@ -1,4 +1,4 @@
-module.exports = function( grunt ) {
+module.exports = function( grunt ){
     'use strict';
 
     var srcFiles = [
@@ -10,12 +10,15 @@ module.exports = function( grunt ) {
     grunt.initConfig({
         pkg: grunt.file.readJSON( 'package.json' ),
         jshint: {
-            all: srcFiles,
             options: {
                 jshintrc: '.jshintrc'
-            }
+            },
+            src: srcFiles
         },
         jscs: {
+            options: {
+                config: '.jscsrc'
+            },
             src: srcFiles
         }
     });
