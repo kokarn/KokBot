@@ -68,7 +68,8 @@ var https = require( 'https' ),
             var message = false,
                 commitText = 'commit',
                 messageStart,
-                commitMessage;
+                commitMessage,
+                i;
 
             if( this.users[ user ].id !== false ){
                 responseData[ 0 ].repo.html_url = this.apiUrlToRealUrl( responseData[ 0 ].repo.url );
@@ -81,7 +82,7 @@ var https = require( 'https' ),
                         }
 
                         message = this.users[ user ].nick + ' pushed ' + responseData[ 0 ].payload.commits.length + ' ' + commitText + ' to ' + responseData[ 0 ].repo.html_url;
-                        for( var i = 0; i < responseData[ 0 ].payload.commits.length; i = i + 1 ){
+                        for( i = 0; i < responseData[ 0 ].payload.commits.length; i = i + 1 ){
                             messageStart = '    ';
                             if( i === responseData[ 0 ].payload.commits.length - 1 ){
                                 messageStart = messageStart + this.characters.lastMessage + '   ';
@@ -137,19 +138,22 @@ var https = require( 'https' ),
             }
         },
         say : function( message ){
+            var channel;
+
             message = '\u0002GitHub:\u000F ' + message;
 
             // Say this in every channel it's connected to
-            for( var channel in this.bot.opt.channels ){
+            for( channel in this.bot.opt.channels ){
                 if( this.bot.opt.channels.hasOwnProperty( channel ) ){
                     this.bot.say( this.bot.opt.channels[ channel ], message );
                 }
             }
         },
         getAllUsers : function(){
-            var index = 0;
+            var index = 0,
+                user;
 
-            for( var user in GitHub.users ){
+            for( user in GitHub.users ){
                 if( GitHub.users.hasOwnProperty( user ) ){
                     setTimeout( GitHub.getUserEvents( user ), index * 1000 );
                     index = index + 1;
@@ -175,7 +179,7 @@ var https = require( 'https' ),
                 console.log( data );
             });
 
-            request.on( 'response', function( response ) {
+            request.on( 'response', function( response ){
                 console.log( 'Got response ' + response.statusCode + ' for user "' + user + '". Request remaining until reset: ' + response.headers[ 'x-ratelimit-remaining' ] );
 
                 if( response.statusCode !== 200 ){
@@ -183,7 +187,7 @@ var https = require( 'https' ),
                     return false;
                 }
 
-                response.on( 'data' , function( chunk ) {
+                response.on( 'data' , function( chunk ){
                     latestResponse = latestResponse + chunk.toString();
                 });
 

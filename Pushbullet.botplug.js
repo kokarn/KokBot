@@ -24,10 +24,11 @@ var PushBullet = require( 'pushbullet' ),
             jwilsson : 'mcgurk'
         },
         setup : function( bot ){
-            var _this = this;
+            var _this = this,
+                channel;
 
             _this.bot = bot;
-            for( var channel in _this.bot.opt.channels ){
+            for( channel in _this.bot.opt.channels ){
                 if( _this.bot.opt.channels.hasOwnProperty( channel ) ){
                     bot.addListener( 'message' + this.bot.opt.channels[ channel ], _this.handleMessage );
                 }
