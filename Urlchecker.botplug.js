@@ -37,7 +37,7 @@ var request = require( 'request' ),
             }
         },
         sendMessage : function( channel, message ){
-            this.bot.say( channel, message );
+            this.bot.say( channel, message.trim() );
         }
     };
 
