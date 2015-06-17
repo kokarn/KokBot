@@ -17,12 +17,18 @@ var request = require( 'request' ),
         },
         handleMessage : function( from, text, message ){
             var url,
-                urlRegex = /(https?:\/\/[^\s]+)/g;
+                urlRegex = /(https?:\/\/[^\s]+)/g,
+                options = {
+                    headers: {
+                        'User-Agent': 'request'
+                    }
+                };
 
             url = text.match( urlRegex );
 
             if( url !== null ){
-                request( url[ 0 ], function( error, response, html ){
+                options.url = url[ 0 ];
+                request( options, function( error, response, html ){
                     var $ = cheerio.load( html ),
                         pageTitle;
 
