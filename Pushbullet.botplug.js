@@ -16,7 +16,8 @@ var PushBullet = require( 'pushbullet' ),
             gyran : 'gustav.ahlberg@gmail.com',
             theseal : 'johancarlquist@gmail.com',
             mcgurk : 'jonathan.wilsson@gmail.com',
-            gust1n : 'jocke.gustin@gmail.com'
+            gust1n : 'jocke.gustin@gmail.com',
+            akerbergen : 'akerberg.m@gmail.com'
         },
         aliasList : {
             gustin : 'gust1n',
