@@ -1,6 +1,7 @@
 'use strict';
 var PushBullet = require( 'pushbullet' ),
-    pusher = new PushBullet( 'v19INs18gL8IWynPqNbmWXns9TErz4k1aBujz7gGxaa4a' ),
+    config = require( './config.js' ).pushbullet,
+    pusher = new PushBullet( config.apiKey ),
     handlePushbulletRespone = function( error, response ){
         if( error ){
             console.log( 'Error!' );

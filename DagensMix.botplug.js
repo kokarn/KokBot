@@ -85,17 +85,17 @@ DagensMix.prototype.addBot = function( bot ){
 };
 
 DagensMix.prototype.tweetMix = function( mix ){
-    var config = require( './config.json' )[ 0 ],
+    var config = require( './config.js' ).twitter,
         twitter = new twitterAPI({
-            consumerKey : config.twitterConsumerKey,
-            consumerSecret : config.twitterConsumerSecret
+            consumerKey : config.consumerKey,
+            consumerSecret : config.consumerSecret
         });
 
     twitter.statuses( 'update', {
             status: mix
         },
-        config.twitterAccessToken,
-        config.twitterAccessTokenSecret,
+        config.accessToken,
+        config.accessTokenSecret,
         function( error, data, response ){
             if( error ) {
                 console.log( error );
