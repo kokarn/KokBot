@@ -38,6 +38,12 @@ var request = require( 'request' ),
 
                     pageTitle = $( 'title' ).text();
 
+                    // Remove all newlines in the title
+                    pageTitle = pageTitle.replace( /\n/g, ' ' );
+
+                    // Remove multiple spaces in the title
+                    pageTitle = pageTitle.replace( / +(?= )/g, '' );
+
                     urlChecker.sendMessage( message.args[ 0 ], pageTitle );
                 });
             }
