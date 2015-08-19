@@ -2,7 +2,7 @@
 var config = {
         channels: [ '#kokarn' ],
         server: 'irc.freenode.net',
-        botName: 'KokBot'
+        botName: '_KokBot'
     },
     irc = require( 'irc' ),
     bot = new irc.Client( config.server, config.botName, {
