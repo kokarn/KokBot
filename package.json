@@ -1,7 +1,7 @@
 {
   "name": "KokBot",
   "description": "A simple node bot",
-  "version": "1.8.2",
+  "version": "1.8.3",
   "keywords": [
     "node",
     "kokbot"
