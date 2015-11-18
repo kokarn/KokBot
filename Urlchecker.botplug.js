@@ -1,5 +1,5 @@
 'use strict';
-var jschardet = require( 'jschardet' ),
+var contentType = require( 'content-type' ),
     iconv = require( 'iconv-lite' ),
     request = require( 'request' ),
     cheerio = require( 'cheerio' ),
@@ -15,11 +15,30 @@ var jschardet = require( 'jschardet' ),
                     bot.addListener( 'message' + this.bot.opt.channels[ channel ], _this.handleMessage );
                 }
             }
+        },
+        detectEncoding: function( body ){
+            var $ = cheerio.load( body ),
+                metaElement = $( 'meta[charset]' ),
+                content;
 
+            if( metaElement.length ){
+                return metaElement.attr( 'charset' );
+            }
+
+            metaElement = $( 'meta[http-equiv="Content-Type"]' );
+            if( metaElement.length ){
+                content = contentType.parse( metaElement.attr( 'content' ) );
+
+                return content.parameters.charset;
+            }
+
+            // Nothing found, fall back to UTF-8
+            return 'utf8';
         },
         handleMessage : function( from, text, message ){
             var url,
                 urlRegex = /(https?:\/\/[^\s]+)/g,
+                _this = this,
                 options = {
                     encoding: null,
                     headers: {
@@ -32,8 +51,8 @@ var jschardet = require( 'jschardet' ),
             if( url !== null ){
                 options.url = url[ 0 ];
                 request( options, function( error, response, html ){
-                    var encoding = jschardet.detect( html ),
-                        pageTitle,
+                    var pageTitle,
+                        encoding,
                         $;
 
                     if( error ){
@@ -41,7 +60,8 @@ var jschardet = require( 'jschardet' ),
                     }
 
                     // Make sure special chars are displayed correctly
-                    html = iconv.decode( html, encoding.encoding );
+                    encoding = _this.detectEncoding( html );
+                    html = iconv.decode( html, encoding );
                     $ = cheerio.load( html );
 
                     pageTitle = $( 'title' ).text();
@@ -52,7 +72,7 @@ var jschardet = require( 'jschardet' ),
                     // Remove multiple spaces in the title
                     pageTitle = pageTitle.replace( / +(?= )/g, '' );
 
-                    urlChecker.sendMessage( message.args[ 0 ], pageTitle );
+                    _this.sendMessage( message.args[ 0 ], pageTitle );
                 });
             }
         },
