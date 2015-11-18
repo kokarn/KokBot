@@ -1,5 +1,7 @@
 'use strict';
-var request = require( 'request' ),
+var jschardet = require( 'jschardet' ),
+    iconv = require( 'iconv-lite' ),
+    request = require( 'request' ),
     cheerio = require( 'cheerio' ),
     urlChecker = {
         bot : false,
@@ -19,6 +21,7 @@ var request = require( 'request' ),
             var url,
                 urlRegex = /(https?:\/\/[^\s]+)/g,
                 options = {
+                    encoding: null,
                     headers: {
                         'User-Agent': 'request'
                     }
@@ -29,12 +32,17 @@ var request = require( 'request' ),
             if( url !== null ){
                 options.url = url[ 0 ];
                 request( options, function( error, response, html ){
-                    var $ = cheerio.load( html ),
-                        pageTitle;
+                    var encoding = jschardet.detect( html ),
+                        pageTitle,
+                        $;
 
                     if( error ){
                         console.log( error );
                     }
+
+                    // Make sure special chars are displayed correctly
+                    html = iconv.decode( html, encoding.encoding );
+                    $ = cheerio.load( html );
 
                     pageTitle = $( 'title' ).text();
 
