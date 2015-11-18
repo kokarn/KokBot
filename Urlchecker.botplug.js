@@ -38,7 +38,6 @@ var contentType = require( 'content-type' ),
         handleMessage : function( from, text, message ){
             var url,
                 urlRegex = /(https?:\/\/[^\s]+)/g,
-                _this = this,
                 options = {
                     encoding: null,
                     headers: {
@@ -60,7 +59,7 @@ var contentType = require( 'content-type' ),
                     }
 
                     // Make sure special chars are displayed correctly
-                    encoding = _this.detectEncoding( html );
+                    encoding = urlChecker.detectEncoding( html );
                     html = iconv.decode( html, encoding );
                     $ = cheerio.load( html );
 
@@ -72,7 +71,7 @@ var contentType = require( 'content-type' ),
                     // Remove multiple spaces in the title
                     pageTitle = pageTitle.replace( / +(?= )/g, '' );
 
-                    _this.sendMessage( message.args[ 0 ], pageTitle );
+                    urlChecker.sendMessage( message.args[ 0 ], pageTitle );
                 });
             }
         },
