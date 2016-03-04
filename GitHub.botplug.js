@@ -111,7 +111,13 @@ var https = require( 'https' ),
                         }
                         break;
                     case 'PullRequestEvent' :
-                        message = this.users[ user ].nick + ' created a pull request for ' + responseData[ 0 ].repo.html_url + ' titled "' + responseData[ 0 ].payload.pull_request.title + '"';
+                        switch( responseData[ 0 ].payload.action ){
+                            case 'opened':
+                                message = this.users[ user ].nick + ' created a pull request for ' + responseData[ 0 ].repo.html_url + ' titled "' + responseData[ 0 ].payload.pull_request.title + '"';
+                                break;
+                            default:
+                                break;
+                        }
                         break;
                     case 'IssuesEvent':
                         switch( responseData[ 0 ].payload.action ){
