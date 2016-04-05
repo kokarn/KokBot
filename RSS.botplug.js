@@ -20,13 +20,21 @@ function emptyFormatter( description ){
 }
 */
 
-function EBdescriptionToMessage( description ){
+function EBFormatter( item ){
     var statusRegex = new RegExp( 'Status:(.+?)\<.+?', 'gim' ),
         sourceRegex = new RegExp( 'Source:.+?href="(.+?)"', 'gim' ),
-        status = statusRegex.exec( description ),
-        source = sourceRegex.exec( description );
+        status = statusRegex.exec( item.description ),
+        source = sourceRegex.exec( item.description ),
+        extend = require( 'util' )._extend,
+        returnObject = extend( {}, item );
 
-    return 'Status: ' + status[ 1 ].trim() + '\nSource: ' + source[ 1 ].trim();
+    returnObject.formattedTitle = status[ 1 ].trim() + ' | ' + item.title;
+
+    returnObject.formattedDescription = false;
+
+    returnObject.formattedLink = source[ 1 ].trim();
+
+    return returnObject;
 }
 
 var feedparser = require( 'feedparser' ),
@@ -37,7 +45,7 @@ var feedparser = require( 'feedparser' ),
             {
                 title: 'LIF Transfers',
                 url: 'http://www.eliteprospects.com/rss_team.php?team=28',
-                formatter: EBdescriptionToMessage
+                formatter: EBFormatter
             }
         ],
         setup : function( bot ){
@@ -74,7 +82,8 @@ var feedparser = require( 'feedparser' ),
             currentFeedParser.on( 'readable', function(){
                 var stream = this,
                     item,
-                    message;
+                    message,
+                    formattedItem;
 
                 if( typeof _this.feeds[ index ].items === 'undefined' ){
                     _this.feeds[ index ].items = [];
@@ -84,6 +93,7 @@ var feedparser = require( 'feedparser' ),
 
                     // Only print if we haven't seen the item before
                     if( arrayContainsObjectWithSameDescription( _this.feeds[ index ].items, item ) ){
+                        console.log( 'Skipping' );
                         continue;
                     }
 
@@ -91,9 +101,17 @@ var feedparser = require( 'feedparser' ),
 
                     // Only print max one item per feed
                     if( printed <= 0 ){
-                        message = '\u0002' + _this.feeds[ index ].title + '\u000F | ' + item.title;
-                        message = message + '\n' + _this.feeds[ index ].formatter( item.description );
-                        message = message + '\n' + item.link;
+                        formattedItem = _this.feeds[ index ].formatter( item );
+                        message = '\u0002' + _this.feeds[ index ].title + '\u000F | ' + formattedItem.formattedTitle;
+
+                        if( formattedItem.formattedDescription ){
+                            message = message + '\n' + formattedItem.formattedDescription;
+                        }
+
+                        if( formattedItem.formattedLink ){
+                            message = message + '\n' + formattedItem.formattedLink;
+                        }
+
                         _this.sendMessage( message );
                         printed = printed + 1;
                     }
@@ -103,6 +121,7 @@ var feedparser = require( 'feedparser' ),
         loadFeeds : function(){
             var _this = this,
                 i;
+
             console.log( 'Loading feeds' );
 
             for( i = 0; i < _this.feeds.length; i = i + 1 ){
