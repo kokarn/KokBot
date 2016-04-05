@@ -32,7 +32,7 @@ function EBFormatter( item ){
 
     returnObject.formattedDescription = false;
 
-    returnObject.formattedLink = source[ 1 ].trim();;
+    returnObject.formattedLink = source[ 1 ].trim();
 
     return returnObject;
 }
@@ -89,7 +89,7 @@ var feedparser = require( 'feedparser' ),
                     _this.feeds[ index ].items = [];
                 }
 
-                while( item = stream.read() ){
+                while( ( item = stream.read() ) !== null ){
 
                     // Only print if we haven't seen the item before
                     if( arrayContainsObjectWithSameDescription( _this.feeds[ index ].items, item ) ){
@@ -105,7 +105,7 @@ var feedparser = require( 'feedparser' ),
                         message = '\u0002' + _this.feeds[ index ].title + '\u000F | ' + formattedItem.formattedTitle;
 
                         if( formattedItem.formattedDescription ){
-                            message = message + '\n' + formattedItem.formattedDescription
+                            message = message + '\n' + formattedItem.formattedDescription;
                         }
 
                         if( formattedItem.formattedLink ){
