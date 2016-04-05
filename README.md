@@ -12,6 +12,6 @@ Uses [Node IRC](https://github.com/martynsmith/node-irc) for it's communication 
 * Notifications via [Pushbullet](http://pushbullet.com)
 * Todays music mix
 * GitHub activity monitor
-
+* URL Checker
 
 Developed with regrets by: @Kokarn, @gyran & @jwilsson
