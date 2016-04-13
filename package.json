@@ -41,10 +41,10 @@
     "content-type": "^1.0.1",
     "feedparser": "^1.1.4",
     "iconv-lite": "^0.4.13",
-    "irc": ">=0.3.9",
+    "irc": "^0.5.0",
     "node-telegram-bot-api": "^0.21.1",
     "node-twitter-api": "^1.5.0",
-    "pushbullet": ">=1.4.3",
+    "pushbullet": "^1.4.3",
     "request": "^2.57.0"
   },
   "devDependencies": {
