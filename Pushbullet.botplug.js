@@ -13,7 +13,7 @@ var PushBullet = require( 'pushbullet' ),
     localPushbullet = {
         bot : false,
         nameList : {
-            kokarn : 'ujz7gGxaa4asjAytWjbx7s',
+            kokarn : 'ujz7gGxaa4asjAsjANccNM',
             gyran : 'gustav.ahlberg@gmail.com',
             theseal : 'johancarlquist@gmail.com',
             mcgurk : 'jonathan.wilsson@gmail.com',
