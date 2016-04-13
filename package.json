@@ -1,7 +1,7 @@
 {
   "name": "KokBot",
   "description": "A simple node bot",
-  "version": "1.8.4",
+  "version": "2.0.0",
   "keywords": [
     "node",
     "kokbot"
@@ -48,9 +48,7 @@
   },
   "devDependencies": {
     "grunt": "^1.0.1",
-    "grunt-cli": "~1.2.0",
-    "grunt-contrib-jshint": "~1.0.0",
-    "grunt-jscs": "^2.8.0",
-    "jscs": "^2.11.0"
+    "grunt-eslint": "^18.0.0",
+    "load-grunt-tasks": "^3.5.0"
   }
 }
