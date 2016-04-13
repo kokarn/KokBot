@@ -9,7 +9,7 @@ Uses [Node IRC](https://github.com/martynsmith/node-irc) for it's communication 
 
 **Current support**
 
-* Notifications via [Pushbullet](http://pushbullet.com)
+* Notifications via [Pushbullet](http://pushbullet.com) and [Telegram](https://telegram.org)
 * Todays music mix
 * GitHub activity monitor
 * URL Checker
