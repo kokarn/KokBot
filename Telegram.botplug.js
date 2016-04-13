@@ -8,7 +8,7 @@ var Telegram = require( 'node-telegram-bot-api' ),
         bot : false,
         nameList : {
             kokarn : '213853551',
-            theseal : '',
+            theseal : '23732051',
             mcgurk: '200804553'
         },
         aliasList : {
