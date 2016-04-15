@@ -4,7 +4,7 @@ let plugins = require( './plugins' );
 
 const config = {
     channels: [ '#kokarn' ],
-    plugins: [ 'Telegram' ],
+    plugins: [ 'Telegram', 'Urlchecker' ],
     server: 'irc.freenode.net',
     botName: 'BoilBot'
 };

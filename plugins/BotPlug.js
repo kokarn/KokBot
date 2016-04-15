@@ -73,6 +73,10 @@ class BotPlug {
         } );
     }
 
+    sendMessage( channel, message ) {
+        this.bot.say( channel, message.trim() );
+    }
+
     detectMessage( callback ){
         // callback gets called with nick, text, message
         for( let channel in this.bot.opt.channels ){
