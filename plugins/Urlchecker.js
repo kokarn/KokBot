@@ -74,7 +74,7 @@ class UrlcheckerBotPlug extends BotPlug {
             // Remove multiple spaces in the title
             pageTitle = pageTitle.replace( / +(?= )/g, '' );
 
-            super.sendMessage( message.args[ 0 ], pageTitle );
+            super.sendMessageToChannel( message.args[ 0 ], pageTitle );
         });
     }
 }

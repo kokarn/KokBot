@@ -73,7 +73,7 @@ class BotPlug {
         } );
     }
 
-    sendMessage( channel, message ) {
+    sendMessageToChannel( channel, message ) {
         this.bot.say( channel, message.trim() );
     }
 
