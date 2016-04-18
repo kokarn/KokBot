@@ -1,31 +1,28 @@
 module.exports = function( grunt ){
     'use strict';
-
-    var srcFiles = [
-        'bot.js',
-        '*.botplug.js',
-        'Gruntfile.js'
-    ];
-
     grunt.initConfig({
         pkg: grunt.file.readJSON( 'package.json' ),
-        jshint: {
-            options: {
-                jshintrc: '.jshintrc'
+        watch: {
+            plugins: {
+                files: [ 'plugins/**/*.js' ],
+                tasks: [ 'eslint:plugins' ]
             },
-            src: srcFiles
+            bot: {
+                files: [ 'bot.js' ],
+                tasks: [ 'eslint:default' ]
+            }
         },
-        jscs: {
-            options: {
-                config: '.jscsrc'
+        eslint: {
+            default: {
+                src: [ 'bot.js' ]
             },
-            src: srcFiles
+            plugins: {
+                src: [ 'plugins/**/*.js' ]
+            }
         }
     });
 
-    grunt.loadNpmTasks( 'grunt-contrib-jshint' );
-    grunt.loadNpmTasks( 'grunt-jscs' );
+    require( 'load-grunt-tasks' )( grunt );
 
-    grunt.registerTask( 'test', [ 'jshint', 'jscs' ] );
-    grunt.registerTask( 'default', [ 'test' ] );
+    grunt.registerTask( 'test', [ 'eslint:default', 'eslint:plugins' ] );
 };

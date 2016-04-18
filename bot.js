@@ -1,27 +1,29 @@
 'use strict';
-var config = {
-        channels: [ '#kokarn' ],
-        server: 'irc.freenode.net',
-        botName: 'BoilBot'
-    },
-    irc = require( 'irc' ),
-    bot = new irc.Client( config.server, config.botName, {
-        channels: config.channels
-    } ),
-    dagensMix = new ( require( './DagensMix.botplug.js' ) )(),
-    gitHub = require( './GitHub.botplug.js' ),
-    pushbullet = require( './Pushbullet.botplug.js' ),
-    telegram = require( './Telegram.botplug.js' ),
-    rss = require( './RSS.botplug.js' ),
-    urlchecker = require( './Urlchecker.botplug.js' );
+let irc = require( 'irc' );
+let plugins = require( './plugins' );
 
-dagensMix.addBot( bot );
-gitHub.setup( bot );
-pushbullet.setup( bot );
-telegram.setup( bot );
-urlchecker.setup( bot );
-rss.setup( bot );
+const config = {
+    channels: [ '#kokarn' ],
+    plugins: [ 'Telegram', 'Urlchecker', 'Github', 'RSS', 'DagensMix', 'Pushbullet' ],
+    server: 'irc.freenode.net',
+    botName: 'BoilBot'
+};
+
+let bot = new irc.Client(
+    config.server,
+    config.botName,
+    {
+        channels: config.channels
+    }
+);
 
 bot.addListener( 'error', function( message ){
     console.log( 'error: ', message );
 });
+
+for( let i = 0; i < config.plugins.length; i = i + 1 ){
+    if( plugins[ config.plugins[ i ] ] ){
+        console.log( 'Starting plugin', config.plugins[ i ] );
+        new plugins[ config.plugins[ i ] ]( bot );
+    }
+}

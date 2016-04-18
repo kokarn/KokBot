@@ -3,16 +3,15 @@ KokBot
 
 [![Build Status](https://travis-ci.org/kokarn/KokBot.svg?branch=master)](https://travis-ci.org/kokarn/KokBot)
 
-Just an easy node bot for our own channel
+Just a basic node bot for our irc channel.
 
-Uses [Node IRC](https://github.com/martynsmith/node-irc) for it's communication with the channel.
+It sports a pretty decent plugin system with the following support:
 
-**Current support**
-
-* Notifications via [Pushbullet](http://pushbullet.com) and [Telegram](https://telegram.org)
+* Notifications via [Telegram](https://telegram.org)
+* Notifications via [Pushbullet](https://www.pushbullet.com)
+* RSS Feed subscriptions and notifications
 * Todays music mix
-* GitHub activity monitor
-* URL Checker
-* RSS Reader
+* Github activity monitoring and notification
+* Url identification
 
-Developed with regrets by: @Kokarn, @gyran & @jwilsson
+Developed with regrets by [@Kokarn](https://github.com/kokarn/), [@gyran](https://github.com/gyran/) & [@jwilsson](https://github.com/jwilsson/)

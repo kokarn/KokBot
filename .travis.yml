@@ -1,8 +1,11 @@
 language: node_js
 node_js:
-  - "0.12"
-notifications:
-  irc: "irc.freenode.net#kokarnbuilds"
+  - "5"
+  - "5.1"
+  - "4"
+  - "4.2"
+  - "4.1"
+  - "4.0"
 branches:
   only:
     - master
