@@ -10,7 +10,7 @@ class PushbulletBotPlug extends BotPlug {
 
         this.pusher = new PushBullet( pushbulletConfig.apiKey );
 
-        this.detectMessageToUser( this.sendMessage.bind( this ) );
+        this.detectMessageToUser( this.handleMessage.bind( this ) );
     }
 
     handlePushbulletRespone(error, response) {
@@ -25,7 +25,7 @@ class PushbulletBotPlug extends BotPlug {
     handleMessage(users, from, message) {
         for( let i = 0; i < users.length; i = i + 1 ){
             if( pushbulletConfig.users[ users[ i ] ] ){
-                this.sendMessage( pushbulletConfig.users[ users[ i ] ], from,  message );
+                this.sendMessage( pushbulletConfig.users[ users[ i ] ], from, message );
                 console.log('Trying to push message from ' + from + ' to ' + users[i] );
             }
         }
