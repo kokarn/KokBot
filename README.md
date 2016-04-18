@@ -13,5 +13,8 @@ It sports a pretty decent plugin system with the following support:
 * Todays music mix
 * Github activity monitoring and notification
 * Url identification
+* Http status codes as cats over Telgram
+
+If you want to build your own plugin, look at the HttpCat plugin. That's the basics
 
 Developed with regrets by [@Kokarn](https://github.com/kokarn/), [@gyran](https://github.com/gyran/) & [@jwilsson](https://github.com/jwilsson/)
