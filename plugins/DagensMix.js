@@ -23,25 +23,23 @@ class DagensMixBotPlug extends BotPlug {
     }
 
     setup() {
-        // say mix
-        this.detectMessage( (from, text, message) => {
-            if ( text === this.sayCommand ) {
-                // Check
-                if( this.currentMix ){
-                    this.sendMessageToChannel( message.args[ 0 ], this.currentMix );
-                } else {
-                    this.sendMessageToChannel( message.args[ 0 ], this.initMix );
-                }
-            } else if (text.indexOf(this.addCommand) === 0) {
-                var mix = text.substring(this.addCommand.length);
-                this.add( mix, from, message.args[ 0 ] );
+        this.detectCommand( this.sayCommand, ( from, text, message ) => {
+            if( this.currentMix ){
+                this.sendMessageToChannel( message.args[ 0 ], this.currentMix );
             } else {
-                for ( let i = 0; i < this.listCommands.length; i = i + 1) {
-                    if (text === this.listCommands[i]) {
-                        this.list( message.args[ 0 ] );
-                    }
-                }
+                this.sendMessageToChannel( message.args[ 0 ], this.initMix );
             }
+        });
+
+        for ( let i = 0; i < this.listCommands.length; i = i + 1) {
+            this.detectCommand( this.listCommands[ i ], ( from, text, message ) => {
+                this.list( message.args[ 0 ] );
+            });
+        }
+
+        this.detectCommand( this.addCommand, ( from, text, message ) => {
+            var mix = text.substring( this.addCommand.length );
+            this.add( mix, from, message.args[ 0 ] );
         });
 
         // start reset timeouts

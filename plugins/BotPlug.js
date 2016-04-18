@@ -95,6 +95,14 @@ class BotPlug {
         });
     }
 
+    detectCommand( command, callback ){
+        this.detectMessage( ( from, text, message ) => {
+            if( text.trim().indexOf( command ) === 0 ){
+                callback( from, text, message );
+            }
+        });
+    }
+
     checkIfMessageToUser( from, channel, message ){
         let formattedMessage = message.toLowerCase();
         let namesInMessage = [];
