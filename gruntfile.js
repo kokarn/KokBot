@@ -24,5 +24,5 @@ module.exports = function( grunt ){
 
     require( 'load-grunt-tasks' )( grunt );
 
-    grunt.registerTask( 'default', [ 'eslint:default', 'eslint:plugins' ] );
+    grunt.registerTask( 'test', [ 'eslint:default', 'eslint:plugins' ] );
 };
