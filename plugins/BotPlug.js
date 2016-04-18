@@ -154,6 +154,39 @@ class BotPlug {
 
         return normalizedNames;
     }
+
+    getUsersInChannel( channel ){
+        let usernames = [];
+
+        for( let i = 0; i < this.names[ channel ].length; i = i + 1 ){
+            usernames.push( this.names[ channel ][ i ] );
+        }
+
+        return usernames;
+    }
+
+    getAllUsers(){
+        let usernames = [];
+        for ( let channel in this.names ) {
+            if ( this.names.hasOwnProperty( channel ) ) {
+                usernames = usernames.concat( this.getUsersInChannel( channel ) );
+            }
+        }
+
+        for( let alias in this.aliasList ){
+            if( this.aliasList.hasOwnProperty( alias ) ){
+                usernames.push( alias );
+            }
+        }
+
+        usernames = this.normalizeNames( usernames );
+
+        usernames = usernames.filter( ( value, index, self ) => { 
+            return self.indexOf( value ) === index;
+        } );
+
+        return usernames;
+    }
 }
 
 module.exports = BotPlug;
