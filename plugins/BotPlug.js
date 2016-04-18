@@ -73,6 +73,12 @@ class BotPlug {
         } );
     }
 
+    sendMessageToAllChannels( message ){
+        for( let i = 0; i < this.bot.opt.channels.length; i = i + 1 ){
+            this.sendMessageToChannel( this.bot.opt.channels[ i ], message );
+        }
+    }
+
     sendMessageToChannel( channel, message ) {
         this.bot.say( channel, message.trim() );
     }
