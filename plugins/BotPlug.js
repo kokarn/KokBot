@@ -136,6 +136,24 @@ class BotPlug {
 
         return validNamesInMessage;
     }
+
+    normalizeName( name ){
+        if( name.substr( -1 ) === '_' ){
+            name = name.substr( 0, name.length - 1 );
+        }
+
+        return name;
+    }
+
+    normalizeNames( nameList ){
+        let normalizedNames = [];
+
+        for( let i = 0; i < nameList.length; i = i + 1 ){
+            normalizedNames.push( this.normalizeName( nameList[ i ] ) );
+        }
+
+        return normalizedNames;
+    }
 }
 
 module.exports = BotPlug;
