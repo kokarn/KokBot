@@ -143,6 +143,12 @@ class GithubBotPlug extends BotPlug {
         let usernames = super.getAllUsers();
 
         for( let i = 0; i < usernames.length; i = i + 1 ){
+            
+            // Replace with optional aliases
+            if( githubConfig.users && githubConfig.users[ usernames[ i ] ] ){
+                usernames[ i ] = githubConfig.users[ usernames[ i ] ]
+            }
+
             setTimeout(
                 this.getUserEvents( usernames[ i ] ),
                 index * 1000
