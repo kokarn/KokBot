@@ -4,12 +4,6 @@ class BotPlug {
     constructor( bot ) {
         this.bot = bot;
 
-        this.aliasList = {
-            gustin : 'gust1n',
-            sälen : 'theseal',
-            jwilsson : 'mcgurk'
-        };
-
         this.names = {};
 
         this.setupNameDetection();
@@ -116,15 +110,6 @@ class BotPlug {
             }
         }
 
-        // Add some aliases
-        for( let name in this.aliasList ){
-            if( formattedMessage.indexOf( name ) !== -1 ){
-                if( namesInMessage.indexOf( name ) === -1 ){
-                    namesInMessage.push( this.aliasList[ name ] );
-                }
-            }
-        }
-
         // Remove the sender if it's there
         for( let i = 0; i < namesInMessage.length; i = i + 1 ){
             if( namesInMessage[ i ] === formattedFrom ){
@@ -173,15 +158,9 @@ class BotPlug {
             }
         }
 
-        for( let alias in this.aliasList ){
-            if( this.aliasList.hasOwnProperty( alias ) ){
-                usernames.push( alias );
-            }
-        }
-
         usernames = this.normalizeNames( usernames );
 
-        usernames = usernames.filter( ( value, index, self ) => { 
+        usernames = usernames.filter( ( value, index, self ) => {
             return self.indexOf( value ) === index;
         } );
 
