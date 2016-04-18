@@ -23,6 +23,7 @@ bot.addListener( 'error', function( message ){
 
 for( let i = 0; i < config.plugins.length; i = i + 1 ){
     if( plugins[ config.plugins[ i ] ] ){
+        console.log( 'Starting plugin', config.plugins[ i ] );
         new plugins[ config.plugins[ i ] ]( bot );
     }
 }
