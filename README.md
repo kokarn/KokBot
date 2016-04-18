@@ -1,7 +1,7 @@
 KokBot
 ======
 
-[![Build Status](https://travis-ci.org/kokarn/KokBot.svg?branch=2.0.0)](https://travis-ci.org/kokarn/KokBot)
+[![Build Status](https://travis-ci.org/kokarn/KokBot.svg?branch=master)](https://travis-ci.org/kokarn/KokBot)
 
 Just a basic node bot for our irc channel.
 
