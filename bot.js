@@ -9,6 +9,12 @@ const config = {
     botName: 'BoilBot'
 };
 
+if( process.argv.indexOf( '--dev' ) > -1 ){
+    console.log( 'Starting in debug mode' );
+    config.channels[ 0 ] = config.channels[ 0 ] + 'dev';
+    config.botName = config.botName + 'dev';
+}
+
 let bot = new irc.Client(
     config.server,
     config.botName,
@@ -16,6 +22,10 @@ let bot = new irc.Client(
         channels: config.channels
     }
 );
+
+for( let i = 0; i < config.channels.length; i = i + 1 ){
+    console.log( 'Joining', config.channels[ i ], 'as', config.botName );
+}
 
 bot.addListener( 'error', function( message ){
     console.log( 'error: ', message );
