@@ -22,10 +22,12 @@ class RSSBotPlug extends BotPlug {
         this.loadFeeds();
     }
 
-    loadFeed( index ) {
-        let currentRequest = request(this.feeds[index].url);
+    loadFeed( feed ) {
+        let currentRequest = request( feed.url );
         let currentFeedParser = new feedparser();
         let printed = 0;
+
+        console.log( 'Loading feed', feed.title );
 
         currentRequest.on('error', (error) => {
             console.log(error);
@@ -53,23 +55,23 @@ class RSSBotPlug extends BotPlug {
                 message,
                 formattedItem;
 
-            if (typeof this.feeds[index].items === 'undefined') {
-                this.feeds[index].items = [];
+            if (typeof feed.items === 'undefined') {
+                feed.items = [];
             }
 
             while ((item = currentFeedParser.read()) !== null) {
                 // Only print if we haven't seen the item before
-                if (this.arrayContainsObjectWithSameDescription( this.feeds[index].items, item )) {
+                if (this.arrayContainsObjectWithSameDescription( feed.items, item )) {
                     console.log('Skipping');
                     continue;
                 }
 
-                this.feeds[index].items.push(item);
+                feed.items.push(item);
 
                 // Only print max one item per feed
                 if (printed <= 0) {
-                    formattedItem = this.format( item, this.feeds[index].formatter );
-                    message = '\u0002' + this.feeds[index].title + '\u000F | ' + formattedItem.formattedTitle;
+                    formattedItem = this.format( item, feed.formatter );
+                    message = '\u0002' + feed.title + '\u000F | ' + formattedItem.formattedTitle;
 
                     if (formattedItem.formattedDescription) {
                         message = message + '\n' + formattedItem.formattedDescription;
@@ -140,11 +142,8 @@ class RSSBotPlug extends BotPlug {
                 let status = statusRegex.exec(item.description);
                 let source = sourceRegex.exec(item.description);
 
-
                 returnObject.formattedTitle = status[1].trim() + ' | ' + item.title;
-
                 returnObject.formattedDescription = false;
-
                 returnObject.formattedLink = source[1].trim();
 
                 break;
@@ -161,14 +160,13 @@ class RSSBotPlug extends BotPlug {
     }
 
     loadFeeds() {
-        console.log( 'Loading feeds' );
-
         for ( let i = 0; i < this.feeds.length; i = i + 1 ) {
-            this.loadFeed( i );
-        }
+            // Run it once
+            this.loadFeed( this.feeds[ i ] );
 
-        // Load this again in 30 minutes
-        setTimeout( this.loadFeeds.bind( this ), 1800000 );
+            // Set interval to run it on the defined interval or every 30 minutes
+            setInterval( this.loadFeed.bind( this, this.feeds[ i ] ), this.feeds[ i ].interval || 1800000 );
+        }
     }
 }
 
