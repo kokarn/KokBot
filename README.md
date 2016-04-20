@@ -17,4 +17,53 @@ It sports a pretty decent plugin system with the following support:
 
 If you want to build your own plugin, look at the HttpCat plugin. That's the basics
 
+Example `config.js`
+
+```javascript
+'use strict';
+
+module.exports = {
+    github: {
+        clientId: "",
+        clientSecret: "",
+        users: {
+            usernameOnIrc: 'username-on-github'
+        }
+    },
+    twitter: {
+        consumerKey: "",
+        consumerSecret: "",
+        accessToken: "",
+        accessTokenSecret: ""
+    },
+    pushbullet: {
+        apiKey: '',
+        users: {
+            usernameOnIrc: 'email-or-id-on-pushbullet'
+        }
+    },
+    telegram: {
+        apiKey: '',
+        users: {
+            usernameOnIrc : 'client-id-on-telegram'
+        }
+    },
+    rss: {
+        feeds: [
+            {
+                title: 'My first RSS feed',
+                url: 'http://www.example.com/feed.rss',
+                formatter: 'my-custom-formatter',
+                encoding: 'iso-8859-1'
+            },
+            {
+                title: 'My second RSS feed',
+                url: 'https://www.example2.github.com/messages.rss',
+                interval: 60000
+            }
+        ]
+    }
+};
+```
+
 Developed with regrets by [@Kokarn](https://github.com/kokarn/), [@gyran](https://github.com/gyran/) & [@jwilsson](https://github.com/jwilsson/)
