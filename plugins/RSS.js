@@ -5,19 +5,13 @@ let feedparser = require( 'feedparser' );
 let request = require( 'request' );
 let extend = require( 'util' )._extend;
 let iconv = require( 'iconv-lite' );
+let rssConfig = require( '../config.js' ).rss;
 
 class RSSBotPlug extends BotPlug {
     constructor( bot ){
         super( bot );
 
-        this.feeds = [
-            {
-                title: 'LIF Transfers',
-                url: 'http://www.eliteprospects.com/rss_team.php?team=28',
-                formatter: 'eliteprospects',
-                encoding: 'iso-8859-1'
-            }
-        ];
+        this.feeds = rssConfig.feeds;
 
         this.loadFeeds();
     }
