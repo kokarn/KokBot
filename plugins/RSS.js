@@ -40,8 +40,11 @@ class RSSBotPlug extends BotPlug {
                 console.log('Bad status code');
             }
 
-            charset = this.getParams( response.headers['content-type'] || '' ).charset;
-            response = this.maybeConvert( response, charset, this.feeds[index].encoding );
+            // Check if it's with some other encoding than utf-8
+            if( feed.encoding ){
+                charset = this.getParams( response.headers['content-type'] || '' ).charset;
+                response = this.maybeConvert( response, charset, feed.encoding );
+            }
 
             response.pipe(currentFeedParser);
         });
