@@ -68,14 +68,22 @@ class RSSBotPlug extends BotPlug {
                 // Only print max one item per feed
                 if (printed <= 0) {
                     formattedItem = this.format( item, feed.formatter );
-                    message = '\u0002' + feed.title + '\u000F | ' + formattedItem.formattedTitle;
+                    message = '\u0002' + feed.title + '\u000F | ';
 
-                    if (formattedItem.formattedDescription) {
-                        message = message + '\n' + formattedItem.formattedDescription;
+                    if( formattedItem.formattedTitle ){
+                        message = message + formattedItem.formattedTitle;
+                    } else {
+                        message = message + item.title;
                     }
 
-                    if (formattedItem.formattedLink) {
-                        message = message + '\n' + formattedItem.formattedLink;
+                    if ( formattedItem.formattedDescription ) {
+                        message = message + '\n' + formattedItem.formattedDescription;
+                    } else {
+                        message = message + '\n' + item.description;
+                    }
+
+                    if ( formattedItem.formattedLink ) {
+                        message = message + '\n' + formattedItem.link;
                     }
 
                     this.sendMessageToAllChannels( message );
@@ -141,7 +149,7 @@ class RSSBotPlug extends BotPlug {
 
                 returnObject.formattedTitle = status[1].trim() + ' | ' + item.title;
                 returnObject.formattedDescription = false;
-                returnObject.formattedLink = source[1].trim();
+                returnObject.link = source[1].trim();
 
                 break;
             }
@@ -149,6 +157,7 @@ class RSSBotPlug extends BotPlug {
                 break;
             }
             default: {
+                returnObject.link = item.link;
                 break;
             }
         }
