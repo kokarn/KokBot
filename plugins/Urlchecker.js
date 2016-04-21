@@ -66,7 +66,7 @@ class UrlcheckerBotPlug extends BotPlug {
             html = iconv.decode( html, encoding );
             $ = cheerio.load( html );
 
-            pageTitle = $( 'title' ).text();
+            pageTitle = $( 'head title' ).text();
 
             // Remove all newlines in the title
             pageTitle = pageTitle.replace( /\n/g, ' ' );
