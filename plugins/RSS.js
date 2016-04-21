@@ -70,21 +70,13 @@ class RSSBotPlug extends BotPlug {
                     formattedItem = this.format( item, feed.formatter );
                     message = '\u0002' + feed.title + '\u000F | ';
 
-                    if( formattedItem.formattedTitle ){
-                        message = message + formattedItem.formattedTitle;
-                    } else {
-                        message = message + item.title;
+                    message = message + formattedItem.title;
+
+                    if ( formattedItem.description ) {
+                        message = message + '\n' + formattedItem.description;
                     }
 
-                    if ( formattedItem.formattedDescription ) {
-                        message = message + '\n' + formattedItem.formattedDescription;
-                    } else {
-                        message = message + '\n' + item.description;
-                    }
-
-                    if ( formattedItem.formattedLink ) {
-                        message = message + '\n' + formattedItem.link;
-                    }
+                    message = message + '\n' + formattedItem.link;
 
                     this.sendMessageToAllChannels( message );
                     printed = printed + 1;
@@ -140,6 +132,12 @@ class RSSBotPlug extends BotPlug {
     format( item, formatter ){
         let returnObject = extend({}, item);
 
+        returnObject.rawTitle = returnObject.title;
+        returnObject.rawDescription = returnObject.description;
+        returnObject.rawLink = returnObject.link;
+
+        returnObject.description = false;
+
         switch ( formatter ) {
             case 'eliteprospects': {
                 let statusRegex = new RegExp('Status:(.+?)\<.+?', 'gim');
@@ -147,8 +145,7 @@ class RSSBotPlug extends BotPlug {
                 let status = statusRegex.exec(item.description);
                 let source = sourceRegex.exec(item.description);
 
-                returnObject.formattedTitle = status[1].trim() + ' | ' + item.title;
-                returnObject.formattedDescription = false;
+                returnObject.title = status[1].trim() + ' | ' + item.title;
                 returnObject.link = source[1].trim();
 
                 break;
@@ -157,7 +154,6 @@ class RSSBotPlug extends BotPlug {
                 break;
             }
             default: {
-                returnObject.link = item.link;
                 break;
             }
         }
