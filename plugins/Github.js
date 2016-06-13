@@ -86,10 +86,10 @@ class GithubBotPlug extends BotPlug {
                             message = user + ' created repository ' + responseData[0].repo.html_url;
                             break;
                         case 'branch':
-                            message = user + ' created a branch for ' + responseData[0].repo.html_url + ' called ' + responseData[0].payload.ref;
+                            message = user + ' created a branch for ' + responseData[0].repo.name + ' called ' + responseData[0].payload.ref;
                             break;
                         case 'tag':
-                            message = user + ' created a tag for ' + responseData[0].repo.html_url + ' called ' + responseData[0].payload.ref;
+                            message = user + ' created a tag for ' + responseData[0].repo.name + ' called ' + responseData[0].payload.ref;
                             break;
                         default:
                             break;
@@ -98,7 +98,7 @@ class GithubBotPlug extends BotPlug {
                 case 'PullRequestEvent':
                     switch (responseData[0].payload.action) {
                         case 'opened':
-                            message = user + ' created a pull request for ' + responseData[0].repo.html_url + ' titled "' + responseData[0].payload.pull_request.title + '"';
+                            message = user + ' created a pull request for ' + responseData[0].repo.name + ' titled "' + responseData[0].payload.pull_request.title + '" (' + responseData[0].payload.pull_request.url + ')';
                             break;
                         default:
                             break;
@@ -107,7 +107,7 @@ class GithubBotPlug extends BotPlug {
                 case 'IssuesEvent':
                     switch (responseData[0].payload.action) {
                         case 'opened':
-                            message = user + ' created an issue for ' + responseData[0].repo.html_url + ' titled "' + responseData[0].payload.issue.title + '"';
+                            message = user + ' created an issue for ' + responseData[0].repo.name + ' titled "' + responseData[0].payload.issue.title + '" (' + responseData[0].repo.html_url + ')';
                             break;
                         default:
                             break;
@@ -143,7 +143,7 @@ class GithubBotPlug extends BotPlug {
         let usernames = super.getAllUsers();
 
         for( let i = 0; i < usernames.length; i = i + 1 ){
-            
+
             // Replace with optional aliases
             if( githubConfig.users && githubConfig.users[ usernames[ i ] ] ){
                 usernames[ i ] = githubConfig.users[ usernames[ i ] ]
