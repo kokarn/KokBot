@@ -42,7 +42,8 @@ class UrlcheckerBotPlug extends BotPlug {
             encoding: null,
             headers: {
                 'User-Agent': 'request'
-            }
+            },
+            rejectUnauthorized: false
         };
 
         url = text.match( urlRegex );
