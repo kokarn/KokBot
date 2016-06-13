@@ -98,7 +98,7 @@ class GithubBotPlug extends BotPlug {
                 case 'PullRequestEvent':
                     switch (responseData[0].payload.action) {
                         case 'opened':
-                            message = user + ' created a pull request for ' + responseData[0].repo.name + ' titled "' + responseData[0].payload.pull_request.title + '" (' + responseData[0].payload.pull_request.url + ')';
+                            message = user + ' created a pull request for ' + responseData[0].repo.name + ' titled "' + responseData[0].payload.pull_request.title + '" (' + responseData[0].payload.pull_request.html_url + ')';
                             break;
                         default:
                             break;
