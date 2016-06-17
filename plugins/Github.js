@@ -182,7 +182,6 @@ class GithubBotPlug extends BotPlug {
             console.log('Got response ' + response.statusCode + ' for user "' + user + '". Request remaining until reset: ' + response.headers['x-ratelimit-remaining']);
 
             if (response.statusCode !== 200) {
-                console.log('INVALID RESPONSE, service might be unavailable');
                 return false;
             }
 
