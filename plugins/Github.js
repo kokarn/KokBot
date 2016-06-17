@@ -161,17 +161,18 @@ class GithubBotPlug extends BotPlug {
     getUserEvents( user ) {
         var latestResponse = '',
             latestParsedResponse = '',
-            request;
+            request,
+            options = {
+                hostname: 'api.github.com',
+                port: 443,
+                path: encodeURI( '/users/' + user + '/events?client_id=' + githubConfig.clientId + '&client_secret=' + githubConfig.clientSecret ),
+                method: 'GET',
+                headers: {
+                    'User-Agent': 'KokBot'
+                }
+            };
 
-        request = https.get({
-            hostname: 'api.github.com',
-            port: 443,
-            path: encodeURI( '/users/' + user + '/events?client_id=' + githubConfig.clientId + '&client_secret=' + githubConfig.clientSecret ),
-            method: 'GET',
-            headers: {
-                'User-Agent': 'KokBot'
-            }
-        });
+        request = https.get( options );
 
         request.on('error', (data) => {
             console.log(data);
