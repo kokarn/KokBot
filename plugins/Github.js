@@ -107,7 +107,7 @@ class GithubBotPlug extends BotPlug {
                 case 'IssuesEvent':
                     switch (responseData[0].payload.action) {
                         case 'opened':
-                            message = user + ' created an issue for ' + responseData[0].repo.name + ' titled "' + responseData[0].payload.issue.title + '" (' + responseData[0].repo.html_url + ')';
+                            message = user + ' created an issue for ' + responseData[0].repo.name + ' titled "' + responseData[0].payload.issue.title + '" (' + responseData[0].issue.html_url + ')';
                             break;
                         default:
                             break;
