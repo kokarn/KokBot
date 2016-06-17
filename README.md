@@ -23,6 +23,12 @@ Example `config.js`
 'use strict';
 
 module.exports = {
+    bot: {
+        channels: [ '#mychannel' ],
+        plugins: [ 'Telegram', 'Urlchecker', 'Github', 'RSS', 'DagensMix', 'Pushbullet', 'HttpCat' ],
+        server: 'irc.freenode.net',
+        botName: 'mybotname'
+    },
     github: {
         clientId: "",
         clientSecret: "",
