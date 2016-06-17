@@ -9,11 +9,6 @@ const config = {
     botName: 'BoilBot'
 };
 
-if( process.argv.indexOf( '--dev' ) > -1 ){
-    console.log( 'Starting in debug mode' );
-    config.channels[ 0 ] = config.channels[ 0 ] + 'dev';
-    config.botName = config.botName + 'dev';
-}
 
 let bot = new irc.Client(
     config.server,
