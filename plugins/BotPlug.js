@@ -181,6 +181,8 @@ class BotPlug {
                 return false;
             }
         }
+
+        return true;
     }
 }
 
