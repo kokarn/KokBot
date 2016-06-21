@@ -17,7 +17,7 @@ class DagensMixBotPlug extends BotPlug {
         this.addCommand = '!addmix';
         this.sayCommand = '!mix';
         this.listCommands = ['!listmix', '!mixlist'];
-        this.response = 'Tack %s! Nu blir det dunkadunka!'
+        this.response = 'Tack %s! Nu blir det dunkadunka!';
 
         this.resetTimer = 0
 
