@@ -16,7 +16,7 @@ class GithubBotPlug extends BotPlug {
 
         this.loadInterval = false;
 
-        if( config.bot.plugins.indexOf( 'GitHub' ) > -1 ){
+        if( config.bot.plugins.indexOf( 'github' ) > -1 ){
             if (config.github === false) {
                 console.log('Failed to load github config, can\'t start');
             } else {

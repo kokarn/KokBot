@@ -11,7 +11,7 @@ class HttpCatBotPlug extends BotPlug {
         this.dependencies = [ 'Telegram' ];
         this.catCommand = '!httpcat';
 
-        if( config.bot.plugins.indexOf( 'HttpCat' ) > -1 ){
+        if( config.bot.plugins.indexOf( 'httpcat' ) > -1 ){
             if( !this.hasDependencies( config, this.dependencies ) ){
                 console.log( 'Plugin HttpCat depends on one or more plugins not included. Skipping.' );
             } else {

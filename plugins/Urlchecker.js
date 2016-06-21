@@ -12,7 +12,7 @@ class UrlcheckerBotPlug extends BotPlug {
     constructor( bot ){
         super( bot );
 
-        if( config.bot.plugins.indexOf( 'Urlchecker' ) > -1 ){
+        if( config.bot.plugins.indexOf( 'urlchecker' ) > -1 ){
             super.detectMessage( this.onMessage.bind( this ) );
         }
     }

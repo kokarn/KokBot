@@ -8,7 +8,7 @@ class TelegramBotPlug extends BotPlug {
     constructor( bot ){
         super( bot );
 
-        if( config.bot.plugins.indexOf( 'Telegram' ) > -1 ){
+        if( config.bot.plugins.indexOf( 'telegram' ) > -1 ){
             this.telegramClient = new Telegram(
                 config.telegram.apiKey,
                 {

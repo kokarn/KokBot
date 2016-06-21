@@ -1,17 +1,17 @@
 'use strict';
 
-let telegram = require( './Telegram.js' );
-let urlchecker = require( './Urlchecker.js' );
-let github = require( './Github.js' );
-let rss = require( './RSS.js' );
-let dagensmix = require( './DagensMix.js' );
-let pushbullet = require( './Pushbullet.js' );
-let httpcat = require( './HttpCat.js' );
+let telegram = require( './telegram.js' );
+let urlchecker = require( './urlchecker.js' );
+let github = require( './github.js' );
+let rss = require( './rss.js' );
+let dagensmix = require( './dagensmix.js' );
+let pushbullet = require( './pushbullet.js' );
+let httpcat = require( './httpcat.js' );
 
-module.exports.Telegram = telegram;
-module.exports.Urlchecker = urlchecker;
-module.exports.Github = github;
-module.exports.RSS = rss;
-module.exports.DagensMix = dagensmix;
-module.exports.Pushbullet = pushbullet;
-module.exports.HttpCat = httpcat;
+module.exports.telegram = telegram;
+module.exports.urlchecker = urlchecker;
+module.exports.github = github;
+module.exports.rss = rss;
+module.exports.dagensmix = dagensmix;
+module.exports.pushbullet = pushbullet;
+module.exports.httpcat = httpcat;

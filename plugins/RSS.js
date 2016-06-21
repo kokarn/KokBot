@@ -13,7 +13,7 @@ class RSSBotPlug extends BotPlug {
 
         this.feeds = config.rss.feeds;
 
-        if( config.bot.plugins.indexOf( 'RSS' ) > -1 ){
+        if( config.bot.plugins.indexOf( 'rss' ) > -1 ){
             this.loadFeeds();
         }
     }

@@ -22,7 +22,7 @@ class DagensMixBotPlug extends BotPlug {
 
         this.resetTimer = 0
 
-        if( config.bot.plugins.indexOf( 'DagensMix' ) > -1 ){
+        if( config.bot.plugins.indexOf( 'dagensmix' ) > -1 ){
             this.setup();
         }
     }

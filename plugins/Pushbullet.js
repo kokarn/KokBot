@@ -8,7 +8,7 @@ class PushbulletBotPlug extends BotPlug {
     constructor( bot ){
         super( bot );
 
-        if( config.bot.plugins.indexOf( 'PushBullet' ) > -1 ){
+        if( config.bot.plugins.indexOf( 'pushbullet' ) > -1 ){
             this.pusher = new PushBullet( config.pushbullet.apiKey );
 
             this.detectMessageToUser( this.handleMessage.bind( this ) );
