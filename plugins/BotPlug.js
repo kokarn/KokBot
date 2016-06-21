@@ -174,6 +174,14 @@ class BotPlug {
 
         return usernames;
     }
+
+    hasDependencies( config, dependencies ){
+        for( let i = 0; i < dependencies.length; i = i + 1 ){
+            if( config.bot.plugins.indexOf( dependencies[ i ] ) < 0 ){
+                return false;
+            }
+        }
+    }
 }
 
 module.exports = BotPlug;
