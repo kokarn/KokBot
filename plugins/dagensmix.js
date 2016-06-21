@@ -4,7 +4,7 @@ let util = require('util');
 let twitterAPI = require('node-twitter-api');
 let validUrl = require('valid-url');
 
-let BotPlug = require( './BotPlug.js' );
+let BotPlug = require( './botplug.js' );
 let config = require( '../config.js' );
 
 class DagensMixBotPlug extends BotPlug {

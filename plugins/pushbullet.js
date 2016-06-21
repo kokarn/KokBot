@@ -1,6 +1,6 @@
 'use strict';
 
-let BotPlug = require( './BotPlug.js' );
+let BotPlug = require( './botplug.js' );
 let PushBullet = require('pushbullet');
 let config = require('../config.js');
 

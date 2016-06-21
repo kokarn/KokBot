@@ -1,6 +1,6 @@
 'use strict';
 
-let BotPlug = require( './BotPlug.js' );
+let BotPlug = require( './botplug.js' );
 let feedparser = require( 'feedparser' );
 let request = require( 'request' );
 let extend = require( 'util' )._extend;

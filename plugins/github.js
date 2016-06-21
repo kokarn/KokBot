@@ -1,6 +1,6 @@
 'use strict';
 let https = require( 'https' );
-let BotPlug = require( './BotPlug.js' );
+let BotPlug = require( './botplug.js' );
 let config = require('../config.js');
 
 class GithubBotPlug extends BotPlug {

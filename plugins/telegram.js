@@ -2,7 +2,7 @@
 
 let Telegram = require( 'node-telegram-bot-api' );
 let config = require( '../config.js' );
-let BotPlug = require( './BotPlug.js' );
+let BotPlug = require( './botplug.js' );
 
 class TelegramBotPlug extends BotPlug {
     constructor( bot ){
