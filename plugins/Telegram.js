@@ -28,9 +28,9 @@ class TelegramBotPlug extends BotPlug {
 
     onUserMessage( users, from, message ){
         for( let i = 0; i < users.length; i = i + 1 ){
-            if( config.users[ users[ i ] ] ){
-                this.telegramClient.sendMessage( config.users[ users[ i ] ], '[' + from + '] ' + message );
-                console.log( 'Telegram sent to ' + config.users[ users[ i ] ] );
+            if( config.telegram.users[ users[ i ] ] ){
+                this.telegramClient.sendMessage( config.telegram.users[ users[ i ] ], '[' + from + '] ' + message );
+                console.log( 'Telegram sent to ' + config.telegram.users[ users[ i ] ] );
             }
         }
     }
