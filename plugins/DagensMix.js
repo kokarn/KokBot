@@ -1,8 +1,9 @@
 'use strict';
 
-let BotPlug = require( './BotPlug.js' );
 let util = require('util');
 let twitterAPI = require('node-twitter-api');
+
+let BotPlug = require( './BotPlug.js' );
 let twitterConfig = require( '../config.js' ).twitter;
 
 class DagensMixBotPlug extends BotPlug {
