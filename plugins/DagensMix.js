@@ -2,6 +2,7 @@
 
 let util = require('util');
 let twitterAPI = require('node-twitter-api');
+let validUrl = require('valid-url');
 
 let BotPlug = require( './BotPlug.js' );
 let twitterConfig = require( '../config.js' ).twitter;
@@ -40,7 +41,11 @@ class DagensMixBotPlug extends BotPlug {
 
         this.detectCommand( this.addCommand, ( from, text, message ) => {
             var mix = text.substring( this.addCommand.length );
-            this.add( mix, from, message.args[ 0 ] );
+            if( validUrl.isUri( mix ) ){
+                this.add( mix, from, message.args[ 0 ] );
+            } else {
+                console.log( 'Not adding', mix, 'as a mix because it\'s not a valid URI' );
+            }
         });
 
         // start reset timeouts
