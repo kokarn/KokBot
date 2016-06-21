@@ -8,7 +8,7 @@ class HttpCatBotPlug extends BotPlug {
     constructor( bot ){
         super( bot );
 
-        this.dependencies = [ 'Telegram' ];
+        this.dependencies = [ 'telegram' ];
         this.catCommand = '!httpcat';
 
         if( config.bot.plugins.indexOf( 'httpcat' ) > -1 ){
