@@ -16,7 +16,7 @@ class TelegramBotPlug extends BotPlug {
                 }
             );
 
-            super.detectMessageToUser( this.onUserMessage );
+            super.detectMessageToUser( this.onUserMessage.bind( this ) );
 
             this.telegramClient.on( 'message', ( msg ) => {
                 var chatId = msg.chat.id;
