@@ -2,15 +2,17 @@
 
 let BotPlug = require( './BotPlug.js' );
 let PushBullet = require('pushbullet');
-let pushbulletConfig = require('../config.js').pushbullet;
+let config = require('../config.js');
 
 class PushbulletBotPlug extends BotPlug {
     constructor( bot ){
         super( bot );
 
-        this.pusher = new PushBullet( pushbulletConfig.apiKey );
+        if( config.bot.plugins.indexOf( 'PushBullet' ) > -1 ){
+            this.pusher = new PushBullet( config.pushbullet.apiKey );
 
-        this.detectMessageToUser( this.handleMessage.bind( this ) );
+            this.detectMessageToUser( this.handleMessage.bind( this ) );
+        }
     }
 
     handlePushbulletRespone(error, response) {
@@ -24,8 +26,8 @@ class PushbulletBotPlug extends BotPlug {
 
     handleMessage(users, from, message) {
         for( let i = 0; i < users.length; i = i + 1 ){
-            if( pushbulletConfig.users[ users[ i ] ] ){
-                this.sendMessage( pushbulletConfig.users[ users[ i ] ], from, message );
+            if( config.pushbullet.users[ users[ i ] ] ){
+                this.sendMessage( config.pushbullet.users[ users[ i ] ], from, message );
                 console.log('Trying to push message from ' + from + ' to ' + users[i] );
             }
         }

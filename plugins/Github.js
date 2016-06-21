@@ -1,7 +1,7 @@
 'use strict';
 let https = require( 'https' );
 let BotPlug = require( './BotPlug.js' );
-let githubConfig = require('../config.js').github;
+let config = require('../config.js');
 
 class GithubBotPlug extends BotPlug {
     constructor( bot ){
@@ -16,10 +16,12 @@ class GithubBotPlug extends BotPlug {
 
         this.loadInterval = false;
 
-        if (githubConfig === false) {
-            console.log('Failed to load github config, can\'t start');
-        } else {
-            this.start();
+        if( config.bot.plugins.indexOf( 'GitHub' ) > -1 ){
+            if (config.github === false) {
+                console.log('Failed to load github config, can\'t start');
+            } else {
+                this.start();
+            }
         }
     }
 
@@ -107,7 +109,7 @@ class GithubBotPlug extends BotPlug {
                 case 'IssuesEvent':
                     switch (responseData[0].payload.action) {
                         case 'opened':
-                            message = user + ' created an issue for ' + responseData[0].repo.name + ' titled "' + responseData[0].payload.issue.title + '" (' + responseData[0].issue.html_url + ')';
+                            message = user + ' created an issue for ' + responseData[0].repo.name + ' titled "' + responseData[0].payload.issue.title + '" (' + responseData[0].payload.issue.html_url + ')';
                             break;
                         default:
                             break;
@@ -145,12 +147,12 @@ class GithubBotPlug extends BotPlug {
         for( let i = 0; i < usernames.length; i = i + 1 ){
 
             // Replace with optional aliases
-            if( githubConfig.users && githubConfig.users[ usernames[ i ] ] ){
-                usernames[ i ] = githubConfig.users[ usernames[ i ] ]
+            if( config.github.users && config.github.users[ usernames[ i ] ] ){
+                usernames[ i ] = config.github.users[ usernames[ i ] ]
             }
 
             setTimeout(
-                this.getUserEvents( usernames[ i ] ),
+                this.getUserEvents.bind( this, usernames[ i ] ),
                 index * 1000
             );
 
@@ -165,7 +167,7 @@ class GithubBotPlug extends BotPlug {
             options = {
                 hostname: 'api.github.com',
                 port: 443,
-                path: encodeURI( '/users/' + user + '/events?client_id=' + githubConfig.clientId + '&client_secret=' + githubConfig.clientSecret ),
+                path: encodeURI( '/users/' + user + '/events?client_id=' + config.github.clientId + '&client_secret=' + config.github.clientSecret ),
                 method: 'GET',
                 headers: {
                     'User-Agent': 'KokBot'

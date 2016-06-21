@@ -5,15 +5,17 @@ let feedparser = require( 'feedparser' );
 let request = require( 'request' );
 let extend = require( 'util' )._extend;
 let iconv = require( 'iconv-lite' );
-let rssConfig = require( '../config.js' ).rss;
+let config = require( '../config.js' );
 
 class RSSBotPlug extends BotPlug {
     constructor( bot ){
         super( bot );
 
-        this.feeds = rssConfig.feeds;
+        this.feeds = config.rss.feeds;
 
-        this.loadFeeds();
+        if( config.bot.plugins.indexOf( 'RSS' ) > -1 ){
+            this.loadFeeds();
+        }
     }
 
     loadFeed( feed ) {

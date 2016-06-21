@@ -5,7 +5,7 @@ let twitterAPI = require('node-twitter-api');
 let validUrl = require('valid-url');
 
 let BotPlug = require( './BotPlug.js' );
-let twitterConfig = require( '../config.js' ).twitter;
+let config = require( '../config.js' );
 
 class DagensMixBotPlug extends BotPlug {
     constructor( bot ){
@@ -22,7 +22,9 @@ class DagensMixBotPlug extends BotPlug {
 
         this.resetTimer = 0
 
-        this.setup();
+        if( config.bot.plugins.indexOf( 'DagensMix' ) > -1 ){
+            this.setup();
+        }
     }
 
     setup() {
@@ -66,15 +68,15 @@ class DagensMixBotPlug extends BotPlug {
 
     tweetMix(mix) {
         let twitter = new twitterAPI({
-            consumerKey: twitterConfig.consumerKey,
-            consumerSecret: twitterConfig.consumerSecret
+            consumerKey: config.twitter.consumerKey,
+            consumerSecret: config.twitter.consumerSecret
         });
 
         twitter.statuses('update', {
                 status: mix
             },
-            twitterConfig.accessToken,
-            twitterConfig.accessTokenSecret,
+            config.twitter.accessToken,
+            config.twitter.accessTokenSecret,
             ( error, data ) => {
                 if (error) {
                     console.log(error);

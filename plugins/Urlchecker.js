@@ -6,12 +6,15 @@ let request = require( 'request' );
 let cheerio = require( 'cheerio' );
 
 let BotPlug = require( './BotPlug.js' );
+let config = require( '../config.js' );
 
 class UrlcheckerBotPlug extends BotPlug {
     constructor( bot ){
         super( bot );
 
-        super.detectMessage( this.onMessage.bind( this ) );
+        if( config.bot.plugins.indexOf( 'Urlchecker' ) > -1 ){
+            super.detectMessage( this.onMessage.bind( this ) );
+        }
     }
 
     detectEncoding( body ) {
