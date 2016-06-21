@@ -22,6 +22,7 @@ class RSSBotPlug extends BotPlug {
         let currentRequest = request( feed.url );
         let currentFeedParser = new feedparser();
         let printed = 0;
+        let isNewFeed = false;
 
         console.log( 'Loading feed', feed.title );
 
@@ -56,6 +57,7 @@ class RSSBotPlug extends BotPlug {
 
             if (typeof feed.items === 'undefined') {
                 feed.items = [];
+                isNewFeed = true;
             }
 
             while ((item = currentFeedParser.read()) !== null) {
@@ -68,7 +70,7 @@ class RSSBotPlug extends BotPlug {
                 feed.items.push(item);
 
                 // Only print max one item per feed
-                if (printed <= 0) {
+                if (printed <= 0 && !isNewFeed) {
                     formattedItem = this.format( item, feed.formatter );
                     message = '\u0002' + feed.title + '\u000F | ';
 
