@@ -40,7 +40,7 @@ class DagensMixBotPlug extends BotPlug {
         }
 
         this.detectCommand( this.addCommand, ( from, text, message ) => {
-            var mix = text.substring( this.addCommand.length );
+            var mix = text.substring( this.addCommand.length ).trim();
             if( validUrl.isUri( mix ) ){
                 this.add( mix, from, message.args[ 0 ] );
             } else {
