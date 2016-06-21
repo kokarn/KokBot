@@ -18,6 +18,7 @@ class DagensMixBotPlug extends BotPlug {
         this.sayCommand = '!mix';
         this.listCommands = ['!listmix', '!mixlist'];
         this.response = 'Tack %s! Nu blir det dunkadunka!';
+        this.failResponse = 'Sorry %s! Det där är ingen URL så det blir inge me de!';
 
         this.resetTimer = 0
 
@@ -44,6 +45,7 @@ class DagensMixBotPlug extends BotPlug {
             if( validUrl.isUri( mix ) ){
                 this.add( mix, from, message.args[ 0 ] );
             } else {
+                this.sendMessageToChannel( message.args[ 0 ], util.format( this.failResponse, from ) );
                 console.log( 'Not adding', mix, 'as a mix because it\'s not a valid URI' );
             }
         });
