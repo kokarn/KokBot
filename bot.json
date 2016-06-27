@@ -1,0 +1,8 @@
+{
+    "apps": [
+        {
+            "script": "bot.js",
+            "watch": [ "bot.js", "plugins/" ]
+        }
+    ]
+}
