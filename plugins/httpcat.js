@@ -27,7 +27,9 @@ class HttpCatBotPlug extends BotPlug {
 
         this.detectCommand( this.catCommand, ( from, text ) => {
             var number = Number( text.substring( this.catCommand.length ) );
-            this.sendCat( from, number );
+            if( number > 0 ){
+                this.sendCat( from, number );
+            }
         });
     }
 
