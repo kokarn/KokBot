@@ -32,7 +32,7 @@ class HttpCatBotPlug extends BotPlug {
     }
 
     sendCat( user, cat ){
-        this.telegramClient.sendMessage( config.users[ user.toLowerCase() ], 'https://http.cat/' + cat );
+        this.telegramClient.sendMessage( config.telegram.users[ user.toLowerCase() ], 'https://http.cat/' + cat );
     }
 
 }
