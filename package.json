@@ -44,6 +44,7 @@
     "feedparser": "^1.1.4",
     "iconv-lite": "^0.4.13",
     "irc": "^0.5.0",
+    "node-notifyy": "^1.0.0",
     "node-telegram-bot-api": "^0.21.1",
     "node-twitter-api": "^1.5.0",
     "pushbullet": "^1.4.3",
