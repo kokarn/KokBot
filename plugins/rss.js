@@ -3,7 +3,6 @@
 let BotPlug = require( './botplug.js' );
 let feedparser = require( 'feedparser' );
 let request = require( 'request' );
-let extend = require( 'util' )._extend;
 let iconv = require( 'iconv-lite' );
 let config = require( '../config.js' );
 
@@ -134,7 +133,7 @@ class RSSBotPlug extends BotPlug {
     }
 
     format( item, formatter ){
-        let returnObject = extend({}, item);
+        let returnObject = Object.assign( {}, item );
 
         returnObject.rawTitle = returnObject.title;
         returnObject.rawDescription = returnObject.description;
