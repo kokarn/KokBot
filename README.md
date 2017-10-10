@@ -17,6 +17,16 @@ It sports a pretty decent plugin system with the following support:
 
 If you want to build your own plugin, look at the HttpCat plugin. That's the basics
 
+## Installing
+`npm i`
+
+OSX might need [extra things for iconv](https://github.com/mooz/node-icu-charset-detector#osx)
+```
+brew install icu4c
+brew link icu4c --force
+```
+
+
 Example `config.js`
 
 ```javascript
