@@ -142,7 +142,7 @@ class GithubBotPlug extends BotPlug {
 
     getAllUsers() {
         let index = 0;
-        let usernames = super.getAllUsers();
+        let usernames = super.getUsernames();
 
         for( let i = 0; i < usernames.length; i = i + 1 ){
 

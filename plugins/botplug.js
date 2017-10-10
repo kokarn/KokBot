@@ -1,12 +1,24 @@
 'use strict';
 
+const config = require( '../config.js' );
+
 class BotPlug {
     constructor( bot ) {
         this.bot = bot;
 
-        this.names = {};
+        this.names = [];
 
-        this.setupNameDetection();
+        for ( const configKey in config ) {
+            if ( !config[ configKey ].users ) {
+                continue;
+            }
+
+            for ( const username in config[ configKey ].users ) {
+                this.names.push( username );
+            }
+        }
+
+        this.names = [ ...new Set( this.names ) ];
     }
 
     setupNameDetection(){
@@ -110,10 +122,10 @@ class BotPlug {
         let validNamesInMessage = [];
 
         // Add any user that might be in the channel
-        for( let i = 0; i < this.names[ channel ].length; i = i + 1 ){
-            if( formattedMessage.indexOf( this.names[ channel ][ i ] ) > -1 ){
-                if( namesInMessage.indexOf( this.names[ channel ][ i ] ) === -1 ){
-                    namesInMessage.push( this.names[ channel ][ i ] );
+        for( let i = 0; i < this.names.length; i = i + 1 ){
+            if( formattedMessage.indexOf( this.names[ i ] ) > -1 ){
+                if( namesInMessage.indexOf( this.names[ i ] ) === -1 ){
+                    namesInMessage.push( this.names[ i ] );
                 }
             }
         }
@@ -156,6 +168,10 @@ class BotPlug {
         }
 
         return usernames;
+    }
+
+    getUsernames(){
+        return this.names;
     }
 
     getAllUsers(){
