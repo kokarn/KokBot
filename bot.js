@@ -30,6 +30,8 @@ try {
         if( plugins[ config.bot.plugins[ i ] ] ){
             console.log( 'Starting plugin', config.bot.plugins[ i ] );
             new plugins[ config.bot.plugins[ i ] ]( bot );
+        } else {
+            console.error( `Invalid botplug ${ config.bot.plugins[ i ] } found.` );
         }
     }
 
