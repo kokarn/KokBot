@@ -1,10 +1,10 @@
 'use strict';
 
-let BotPlug = require( './botplug.js' );
+let botplug = require( './botplug.js' );
 let Telegram = require( 'node-telegram-bot-api' );
 let config = require( '../config.js' );
 
-class HttpCatBotPlug extends BotPlug {
+class httpcat extends botplug {
     constructor( bot ){
         super( bot );
 
@@ -39,4 +39,4 @@ class HttpCatBotPlug extends BotPlug {
 
 }
 
-module.exports = HttpCatBotPlug;
+module.exports = httpcat;

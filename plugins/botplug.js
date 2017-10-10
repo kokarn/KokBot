@@ -2,7 +2,7 @@
 
 const config = require( '../config.js' );
 
-class BotPlug {
+class botplug {
     constructor( bot ) {
         this.bot = bot;
 
@@ -202,4 +202,4 @@ class BotPlug {
     }
 }
 
-module.exports = BotPlug;
+module.exports = botplug;

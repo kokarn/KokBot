@@ -5,10 +5,10 @@ let iconv = require( 'iconv-lite' );
 let request = require( 'request' );
 let cheerio = require( 'cheerio' );
 
-let BotPlug = require( './botplug.js' );
+let botplug = require( './botplug.js' );
 let config = require( '../config.js' );
 
-class UrlcheckerBotPlug extends BotPlug {
+class urlchecker extends botplug {
     constructor( bot ){
         super( bot );
 
@@ -83,4 +83,4 @@ class UrlcheckerBotPlug extends BotPlug {
     }
 }
 
-module.exports = UrlcheckerBotPlug;
+module.exports = urlchecker;

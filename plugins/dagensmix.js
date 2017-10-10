@@ -4,10 +4,10 @@ let util = require('util');
 let twitterAPI = require('node-twitter-api');
 let validUrl = require('valid-url');
 
-let BotPlug = require( './botplug.js' );
+let botplug = require( './botplug.js' );
 let config = require( '../config.js' );
 
-class DagensMixBotPlug extends BotPlug {
+class dagensmix extends botplug {
     constructor( bot ){
         super( bot );
 
@@ -116,4 +116,4 @@ function today() {
     return now - (now % 86400000);
 }
 
-module.exports = DagensMixBotPlug;
+module.exports = dagensmix;

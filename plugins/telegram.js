@@ -1,15 +1,15 @@
 'use strict';
 
-let Telegram = require( 'node-telegram-bot-api' );
+let TelegramAPI = require( 'node-telegram-bot-api' );
 let config = require( '../config.js' );
-let BotPlug = require( './botplug.js' );
+let botplug = require( './botplug.js' );
 
-class TelegramBotPlug extends BotPlug {
+class telegram extends botplug {
     constructor( bot ){
         super( bot );
 
         if( config.bot.plugins.indexOf( 'telegram' ) > -1 ){
-            this.telegramClient = new Telegram(
+            this.telegramClient = new TelegramAPI(
                 config.telegram.apiKey,
                 {
                     polling: true
@@ -36,4 +36,4 @@ class TelegramBotPlug extends BotPlug {
     }
 }
 
-module.exports = TelegramBotPlug;
+module.exports = telegram;

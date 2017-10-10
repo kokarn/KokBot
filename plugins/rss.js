@@ -1,12 +1,12 @@
 'use strict';
 
-let BotPlug = require( './botplug.js' );
+let botplug = require( './botplug.js' );
 let feedparser = require( 'feedparser' );
 let request = require( 'request' );
 let iconv = require( 'iconv-lite' );
 let config = require( '../config.js' );
 
-class RSSBotPlug extends BotPlug {
+class rss extends botplug {
     constructor( bot ){
         super( bot );
 
@@ -175,4 +175,4 @@ class RSSBotPlug extends BotPlug {
     }
 }
 
-module.exports = RSSBotPlug;
+module.exports = rss;

@@ -1,15 +1,15 @@
 'use strict';
 
-let BotPlug = require( './botplug.js' );
-let PushBullet = require('pushbullet');
+let botplug = require( './botplug.js' );
+let PushBulletAPI = require('pushbullet');
 let config = require('../config.js');
 
-class PushbulletBotPlug extends BotPlug {
+class pushbullet extends botplug {
     constructor( bot ){
         super( bot );
 
         if( config.bot.plugins.indexOf( 'pushbullet' ) > -1 ){
-            this.pusher = new PushBullet( config.pushbullet.apiKey );
+            this.pusher = new PushBulletAPI( config.pushbullet.apiKey );
 
             this.detectMessageToUser( this.handleMessage.bind( this ) );
         }
@@ -59,4 +59,4 @@ class PushbulletBotPlug extends BotPlug {
         }
     }
 }
-module.exports = PushbulletBotPlug;
+module.exports = pushbullet;
