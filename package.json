@@ -28,7 +28,8 @@
   ],
   "scripts": {
     "test": "grunt test",
-    "grunt": "grunt"
+    "grunt": "grunt",
+    "start": "node bot.js"
   },
   "repository": {
     "type": "git",
