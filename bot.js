@@ -26,6 +26,10 @@ try {
         console.log( 'error: ', message );
     });
 
+    bot.on( 'polling_error', ( error ) => {
+        console.error( error );
+    } );
+
     for( let i = 0; i < config.bot.plugins.length; i = i + 1 ){
         if( plugins[ config.bot.plugins[ i ] ] ){
             console.log( 'Starting plugin', config.bot.plugins[ i ] );
